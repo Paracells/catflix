@@ -5,11 +5,11 @@
   >
     <div
         @click.stop
-        class="max-h-full flex items-center justify-center bg-gray-800 py-12 px-4 sm:px-6 lg:px-8 w-full max-w-xl rounded-xl"
+        class="max-h-full flex items-center justify-center bg-gray-800 py-10 px-4 sm:px-6 lg:px-8 w-full max-w-xl rounded-xl"
     >
-      <div class="max-w-md w-full space-y-8">
+      <div class="max-w-md w-full">
         <div>
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-300">
+          <h2 class="mt-0 text-center text-3xl font-extrabold text-gray-300">
             Sign in to your account
           </h2>
         </div>
