@@ -12,10 +12,10 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import AppMovie from "./AppMovie.vue";
+import AppMovie from "./AppCatalogMovie.vue";
 
 export default {
-  name: "TheCatalog",
+  name: "AppCatalog",
   components: { AppMovie },
   data() {
     return {
@@ -29,11 +29,10 @@ export default {
     ...mapGetters("movies", ["getMovies"]),
   },
   async created() {
-    // console.log(process.env);
     await this.getFilms();
   },
 };
-</script> 
+</script>
 
 <style scoped>
 </style>

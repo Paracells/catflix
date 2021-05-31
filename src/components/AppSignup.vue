@@ -1,6 +1,5 @@
 <template>
   <div
-      @click="close"
       class="absolute inset-0 z-40 bg-opacity-70 bg-black flex items-center justify-center"
   >
     <div
@@ -8,10 +7,24 @@
         class="max-h-full flex items-center justify-center bg-gray-800 py-10 px-4 sm:px-6 lg:px-8 w-full max-w-xl rounded-xl"
     >
       <div class="max-w-md w-full">
-        <div>
-          <h2 class="mt-0 text-center text-3xl font-extrabold text-gray-300">
-            Create your CatFlix account
+        <div class="flex justify-between text-gray-300 items-center">
+          <h2 class="-mt-2 text-center text-3xl font-extrabold text-gray-300">
+            Create CatFlix account
           </h2>
+          <svg @click="close"
+               class="w-8 h-8 cursor-pointer text-red-300"
+               fill="none"
+               stroke="currentColor"
+               viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
         </div>
         <Form class="mt-8 space-y-6" action="#" method="POST" @submit="close" :validation-schema="signUpForm">
           <input type="hidden" name="remember" value="true"/>
@@ -25,7 +38,7 @@
                   class="input mb-4"
                   placeholder="Name"
               />
-              <div class="text-red-400 mb-2">
+              <div class="text-red-400 mb-4">
                 <error-message name="name"/>
               </div>
             </div>
@@ -40,7 +53,7 @@
                   class="input mb-4"
                   placeholder="Email address"
               />
-              <div class="text-red-400 mb-2">
+              <div class="text-red-400 mb-4">
                 <error-message name="email"/>
               </div>
             </div>
@@ -55,7 +68,7 @@
                   class="input"
                   placeholder="Password"
               />
-              <div class="text-red-400 mb-2">
+              <div class="text-red-400 mt-4">
                 <error-message name="password"/>
               </div>
             </div>

@@ -16,9 +16,9 @@
         Discover the world of cinema with US
       </div>
 
-      <button class="px-10 btn btn-primary w-60">
-        <router-link :to="{ name: 'TheCatalog' }"> .enter</router-link>
-      </button>
+      <router-link :to="{ name: 'space' }">
+        <button class="px-10 btn btn-primary w-60">.enter</button>
+      </router-link>
     </div>
 
     <div class="col-start-4 col-span-3">

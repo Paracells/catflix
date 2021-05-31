@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import LayoutNavbar from "../layouts/LayoutNavbar.vue";
-import TheCatalog from "../components/TheCatalog.vue";
-import TheMovie from "../views/Movie.vue";
+import AppCatalog from "../components/AppCatalog.vue";
+import TheMovie from "../views/TheMovie.vue";
 
 const routes = [
   {
@@ -19,15 +19,16 @@ const routes = [
     children: [
       {
         path: "",
-        name: "TheCatalog",
-        component: TheCatalog,
-      },
-      {
-        path: ":id",
-        name: "TheMovie",
-        component: TheMovie,
+        name: "AppCatalog",
+        component: AppCatalog,
       },
     ],
+  },
+  {
+    // карточка-компонент отдельнго фильма
+    path: "/movies/:id",
+    name: "TheMovie",
+    component: TheMovie,
   },
 ];
 
