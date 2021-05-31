@@ -44,7 +44,7 @@
       </transition>
     </div>
   </header>
-  <router-view/>
+
 </template>
 
 <script>

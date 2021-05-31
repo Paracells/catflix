@@ -1,40 +1,33 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import Home from "../views/Home.vue";
-import LayoutNavbar from "../layouts/LayoutNavbar.vue";
-import AppCatalog from "../components/AppCatalog.vue";
 import TheMovie from "../views/TheMovie.vue";
+import AppCatalog from "../components/AppCatalog.vue";
 
 const routes = [
-  {
-    // стартовый компонент страницы
-    path: "",
-    name: "Home",
-    component: Home,
-  },
-  {
-    // layout с navbar
-    path: "/movies",
-    name: "space",
-    component: LayoutNavbar,
-    children: [
-      {
+    {
+        // стартовый компонент страницы
         path: "",
+        name: "Home",
+        component: Home,
+    },
+    {
+        // layout с navbar
+        path: "/movies",
         name: "AppCatalog",
         component: AppCatalog,
-      },
-    ],
-  },
-  {
-    // карточка-компонент отдельнго фильма
-    path: "/movies/:id",
-    name: "TheMovie",
-    component: TheMovie,
-  },
+
+    },
+    {
+        // карточка-компонент отдельного фильма
+        path: "/movies/:id",
+        name: "TheMovie",
+        component: TheMovie,
+    },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+    history: createWebHistory(),
+    routes,
 });
 
 export default router;

@@ -1,32 +1,31 @@
 <template>
   <div class="bg__video">
     <video
-      class="video"
-      src="../assets/video-bg.mp4"
-      loop
-      muted
-      autoplay
+        class="video"
+        src="../assets/video-bg.mp4"
+        loop
+        muted
+        autoplay
     ></video>
   </div>
 
   <div class="grid grid-cols-5 h-screen items-center">
     <div class="text-white text-7xl col-start-2 font-semibold">
-      For A Good <br /><span class="text-indigo-400">mood</span>
+      For A Good <br/><span class="text-indigo-400">mood</span>
       <div class="text-white max-w-lg mt-8 text-xl">
         Discover the world of cinema with US
       </div>
 
-      <router-link :to="{ name: 'space' }">
+      <router-link :to="{ name: 'AppCatalog' }">
         <button class="px-10 btn btn-primary w-60">.enter</button>
       </router-link>
     </div>
 
     <div class="col-start-4 col-span-3">
-      <img class="logo__img" src="../assets/logo.png" alt="" />
+      <img class="logo__img" src="../assets/logo.png" alt=""/>
     </div>
   </div>
 </template>
-
 
 
 <style scoped>
@@ -45,6 +44,7 @@
   height: 500px;
   object-fit: cover;
 }
+
 .bg__video::before {
   content: "";
   background-color: rgba(0, 0, 0, 0.6);

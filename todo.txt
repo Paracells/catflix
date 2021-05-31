@@ -3,15 +3,17 @@ Home page
 2. другая кнопка?
 
 Movies page
-1. индикация загрузки
++1. индикация загрузки
 
 
 Login and Signup page
-
 1. slot
 
 Login page
 1. Remember me галочка - запомнить в localstorage
+
+Movie page
+1. Под разные размеры экрана
 
 Header
 белая полоса?

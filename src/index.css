@@ -23,3 +23,14 @@
         @apply bg-blend-lighten border-2 focus:border-black p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white appearance-none focus:ring transform transition hover:scale-105 duration-300 ease-in-out;
     }
 }
+
+#loading {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+}

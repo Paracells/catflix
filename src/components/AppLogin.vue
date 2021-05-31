@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     close() {
-      console.log(this.loginForm)
       this.$emit("close");
     },
   },
