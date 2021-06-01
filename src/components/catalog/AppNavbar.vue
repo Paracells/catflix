@@ -67,12 +67,12 @@ export default {
   },
   methods: {
     ...mapActions('movies', ['searchFilms', 'getFilms']),
-    loadFilms() {
+    async loadFilms() {
       if (this.searchText) {
-        this.searchFilms(this.searchText)
+        await this.searchFilms(this.searchText)
       } else {
         if (this.getMovies.length === 0) {
-          this.getFilms()
+          await this.getFilms()
         }
       }
     }

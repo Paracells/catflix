@@ -67,7 +67,6 @@ const movies = {
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }&language=en-US`
             ).then((data) => data.json());
-            console.log(result)
             commit("setMovie", result);
         },
 
@@ -86,7 +85,6 @@ const movies = {
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }&language=en-US`
             ).then((data) => data.json());
-            console.log(result)
             commit("setKeywords", result.keywords);
         },
 

@@ -1,5 +1,8 @@
 <template>
-  <div class="relative" @mouseover="show = true" @mouseout="show = false" v-if="!loadingSpinner">
+  <div v-if="loadingSpinner" class="flex justify-center items-center h-screen w-full">
+    <div id="loading"></div>
+  </div>
+  <div class="relative" @mouseover="show = true" @mouseout="show = false" v-else>
     <router-link :to="{ name: 'TheMovie', params: { id: movie.id } }">
       <div class="bg-gray-800 shadow-md rounded-3xl p-2 cursor-pointer">
         <img
@@ -60,13 +63,14 @@ export default {
     const result = getImage(this.movie, 'poster_path')
     this.imageLink = result
   },
-  mounted() {
-    this.loadingSpinner = false
-  },
   computed: {
     overView() {
       return calcLength(this.movie.overview)
     },
+  },
+  mounted() {
+    this.loadingSpinner = false
+
   },
   watch: {
     show() {

@@ -26,6 +26,7 @@ const routes = [
         component: TheMovie,
 
         beforeEnter: (to, from, next) => {
+            console.log(1, store.getters["movies/getCurrentMovie"])
             const result = store.getters["movies/getById"](to.params.id)
             if (result) {
                 next()
