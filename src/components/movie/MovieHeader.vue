@@ -1,5 +1,18 @@
 <template>
   <div class="h-full w-full relative">
+    <div>
+      <svg @click="$router.back()"
+           class="h-16 w-16 text-gray-100 cursor-pointer bg-indigo-500 bg-opacity-90 rounded-full absolute top-6 left-6 hover:ring-yellow-500 ring-4"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 8 8 12 12 16"/>
+        <line x1="16" y1="12" x2="8" y2="12"/>
+      </svg>
+    </div>
     <img class="object-cover h-80 w-full" loading="lazy"
          :src="imageLink"/>
     <div

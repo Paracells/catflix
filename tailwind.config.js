@@ -7,7 +7,7 @@ module.exports = {
         extend: {},
         fontFamily: {
             sans: ['Rubik', ...defaultTheme.fontFamily.sans],
-            headline: ['Bebas Neue']
+            headline: ['Ubuntu Condensed']
         },
     },
     variants: {

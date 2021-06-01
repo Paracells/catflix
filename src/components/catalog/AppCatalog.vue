@@ -4,7 +4,7 @@
   </div>
   <div v-else>
     <app-navbar/>
-    <div>
+    <div v-if="getMovies.length!==0">
 
       <transition-group name="fade" tag="ul" mode="out-in"
                         class="grid mt-8 gap-8 xl:grid-cols-4 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mr-4 ml-4">
@@ -14,6 +14,7 @@
       </transition-group>
 
     </div>
+    <div class="flex items-center justify-center h-screen text-7xl font-medium" v-else>No data</div>
   </div>
 </template>
 

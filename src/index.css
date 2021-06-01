@@ -24,7 +24,7 @@
     }
 
     .header__card {
-        @apply font-headline tracking-wider text-white text-4xl ml-5 mt-5 font-semibold text-purple-400
+        @apply font-headline text-white text-4xl ml-5 mt-5 font-semibold text-purple-400
     }
 
     .chips {
