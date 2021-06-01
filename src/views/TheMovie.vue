@@ -24,16 +24,21 @@
       </div>
 
     </div>
-    <div class="text-white text-4xl ml-5 mt-5 font-semibold text-purple-400">Actors</div>
+    <div class="text-white text-4xl ml-5 mt-5 font-semibold text-purple-400">
+      Cast
+    </div>
     <div class="mt-6 ml-5 p-10 inline-block bg-gray-800 rounded-lg bg-opacity-50">
       <ul class="flex justify-start items-start space-x-6">
         <li v-for="i in getCast" :key="i.id">
           <template
-              class="flex flex-col bg-purple-50-500 p-1 bg-opacity-20 ring-1 ring-purple-600 relative ">
-            <img class="w-48 h-48 object-cover" :src="'https://image.tmdb.org/t/p/original/'+i.profile_path"
+              class="flex flex-col bg-purple-50-500 p-1 bg-opacity-20 ring-4 rounded-md ring-gray-900 relative hover:ring-gray-700">
+            <img class="w-48 h-48 object-cover rounded-md "
+                 :src="getProfilePhoto(i)"
                  :alt="i.original_name">
-            <p class="text-white text-center mt-4 absolute -bottom-2 -right-2 uppercase ring-4 ring-gray-800 p-2 bg-red-600">
+            <p class="text-white text-center mt-4 absolute bottom-16 -right-2 uppercase ring-4 ring-gray-800 p-2 bg-red-600">
               {{ i.original_name }}</p>
+            <p class="text-white m-4 text-center p-2 bg-indigo-600 bg-opacity-20">
+              {{ i.character ? i.character : 'no data' }}</p>
           </template>
 
         </li>
@@ -44,13 +49,15 @@
 </template>
 <script>
 import {mapActions, mapGetters} from 'vuex'
-import {calcLength, BASE_IMAGE_URL} from "../utils";
+import {calcLength} from "../utils";
+import noPhoto from '../assets/no-photo.jpg'
 
 export default {
   name: 'TheMovie',
   data() {
     return {
-      loading: false
+      loading: false,
+      noImage: noPhoto
     }
   },
   computed: {
@@ -64,9 +71,19 @@ export default {
         return calcLength(movie.overview)
       }
     },
+
   },
   methods: {
-    ...mapActions("movies", ['getFilm', "getCredits"])
+    ...mapActions("movies", ['getFilm', "getCredits"]),
+    getProfilePhoto(id) {
+      const profilePhoto = id.profile_path
+      console.log(id.profile_path)
+      if (profilePhoto) {
+        return "https://image.tmdb.org/t/p/original/" + profilePhoto
+      } else {
+        return noPhoto
+      }
+    }
   },
   async created() {
     this.loading = true

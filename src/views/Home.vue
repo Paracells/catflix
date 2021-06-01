@@ -9,14 +9,14 @@
     ></video>
   </div>
 
-  <div class="grid grid-cols-5 h-screen items-center">
-    <div class="text-white text-7xl col-start-2 font-semibold">
+  <div class="flex items-center justify-evenly h-screen">
+    <div class="text-white text-7xl font-semibold w-90">
       For A Good <br/><span class="text-indigo-400">mood</span>
       <div class="text-white max-w-lg mt-8 text-xl">
         Discover the world of cinema with US
       </div>
 
-      <router-link :to="{ name: 'AppCatalog' }">
+      <router-link :to="{ name: 'AppCatalog' }" replace>
         <button class="px-10 btn btn-primary w-60">.enter</button>
       </router-link>
     </div>

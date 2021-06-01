@@ -28,6 +28,7 @@ const movies = {
         },
         setCredits(state, payload) {
             state.credits = payload;
+            console.log(state.credits)
         },
     },
     //todo добавить анимацию на загрузку и проверку ошибок
@@ -56,7 +57,6 @@ const movies = {
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }&language=en-US`
             ).then((data) => data.json());
-            console.log(result)
 
             commit("setCredits", result.cast.splice(0, 5));
         },
