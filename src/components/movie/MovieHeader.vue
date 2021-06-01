@@ -1,7 +1,7 @@
 <template>
   <div class="h-full w-full relative">
     <img class="object-cover h-80 w-full" loading="lazy"
-         :src="'https://image.tmdb.org/t/p/original' + movie.backdrop_path"/>
+         :src="imageLink"/>
     <div
         class="font-headline tracking-wider text-white absolute bottom-40 left-5 text-7xl font-extrabold text-yellow-400 text-3xl">
       {{
@@ -41,14 +41,15 @@
 </template>
 
 <script>
-import {calcLength} from "../../utils";
+import {calcLength, getImage} from "../../utils";
 import {mapGetters} from "vuex";
 
 export default {
   name: "MovieHeader",
   data() {
     return {
-      favorite: false
+      favorite: false,
+      imageLink: ''
     }
   },
   computed: {
@@ -64,7 +65,11 @@ export default {
     changeFavorite() {
       this.favorite = !this.favorite
     }
-  }
+  },
+  async created() {
+    const result = getImage(this.movie, 'backdrop_path')
+    this.imageLink = result
+  },
 
 }
 </script>
