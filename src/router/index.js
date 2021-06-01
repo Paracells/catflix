@@ -3,16 +3,17 @@ import Home from "../views/Home.vue";
 import TheMovie from "../views/TheMovie.vue";
 import AppCatalog from "../components/AppCatalog.vue";
 import NotFound from "../components/NotFound.vue";
+import store from '../store'
 
 const routes = [
     {
         // стартовый компонент страницы
-        path: "",
+        path: "/",
         name: "Home",
         component: Home,
     },
     {
-        // layout с navbar
+        // каталог фильмов
         path: "/movies",
         name: "AppCatalog",
         component: AppCatalog,
@@ -23,18 +24,33 @@ const routes = [
         path: "/movies/:id",
         name: "TheMovie",
         component: TheMovie,
+
+        beforeEnter: (to, from, next) => {
+            const result = store.getters["movies/getById"](to.params.id)
+            if (result) {
+                next()
+            } else {
+                next({name: 'NotFound'})
+            }
+
+        }
+
     },
     {
+        // 404 по всем другим адресам
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: NotFound
-    }
+    },
+
 ];
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
+
 });
+
 
 export default router;
 

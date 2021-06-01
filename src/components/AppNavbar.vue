@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import AppLogin from "@/components/AppLogin.vue";
-import AppSignup from "@/components/AppSignup.vue";
+import AppLogin from "@/components/auth/AppLogin.vue";
+import AppSignup from "@/components/auth/AppSignup.vue";
 
 export default {
   components: {AppLogin, AppSignup},

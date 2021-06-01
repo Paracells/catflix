@@ -9,9 +9,12 @@ const movies = {
     },
     getters: {
         getMovies: (state) => state.movies,
-        /* getById: (state) => (id) => {
-                 return state.movies.find((movie) => movie.id === +id);
-             },*/
+        getById: (state) => (id) => {
+            const result = state.movies.find((movie) => movie.id === +id);
+            console.log(id)
+            console.log(state.movies)
+            return result
+        },
         getCurrentMovie: (state) => {
             return state.movie;
         },
@@ -28,7 +31,6 @@ const movies = {
         },
         setCredits(state, payload) {
             state.credits = payload;
-            console.log(state.credits)
         },
     },
     //todo добавить анимацию на загрузку и проверку ошибок

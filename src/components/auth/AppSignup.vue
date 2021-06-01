@@ -75,7 +75,7 @@
           </div>
 
           <div>
-            <button type="submit" class="btn btn-primary w-full bg-green-500">
+            <button type="submit" class="btn btn-primary w-full bg-green-500 mt-6">
               Sign up
             </button>
           </div>
