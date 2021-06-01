@@ -3,15 +3,16 @@
     <div id="loading"></div>
   </div>
   <cast-card v-else/>
-
+  <about-film/>
 </template>
 <script>
 
 import CastCard from "../components/CastCard.vue";
+import AboutFilm from "../components/AboutFilm.vue";
 
 export default {
   name: 'TheMovie',
-  components: {CastCard},
+  components: {AboutFilm, CastCard},
   data() {
     return {
       loading: false,

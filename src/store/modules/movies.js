@@ -5,14 +5,13 @@ const movies = {
     state: {
         movies: [],
         movie: "",
-        credits: ''
+        credits: '',
+        crew: []
     },
     getters: {
         getMovies: (state) => state.movies,
         getById: (state) => (id) => {
             const result = state.movies.find((movie) => movie.id === +id);
-            console.log(id)
-            console.log(state.movies)
             return result
         },
         getCurrentMovie: (state) => {
@@ -21,6 +20,16 @@ const movies = {
         getCast: (state) => {
             return state.credits;
         },
+        getCrew: (state) => {
+            console.log(state.crew.filter(el => el.known_for_department === 'Directing'));
+            return {
+                director: state.crew.filter(el => el.known_for_department === 'Directing').map(el => el.name).join(', '),
+                writing: state.crew.filter(el => el.known_for_department === 'Writing').map(el => el.name).join(', ')
+
+
+            }
+        }
+
     },
     mutations: {
         setMovies(state, payload) {
@@ -32,9 +41,11 @@ const movies = {
         setCredits(state, payload) {
             state.credits = payload;
         },
+        setCrew(state, payload) {
+            state.crew = payload
+        }
     },
     //todo добавить анимацию на загрузку и проверку ошибок
-    // todo вынести переменные
     actions: {
         async getFilms({commit}) {
             const result = await fetch(
@@ -59,7 +70,7 @@ const movies = {
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }&language=en-US`
             ).then((data) => data.json());
-
+            commit("setCrew", result.crew);
             commit("setCredits", result.cast.splice(0, 5));
         },
     },

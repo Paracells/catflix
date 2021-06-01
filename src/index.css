@@ -22,6 +22,10 @@
     .input {
         @apply bg-blend-lighten border-2 focus:border-black p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white appearance-none focus:ring transform transition hover:scale-105 duration-300 ease-in-out;
     }
+
+    .header__card {
+        @apply text-white text-4xl ml-5 mt-5 font-semibold text-purple-400
+    }
 }
 
 #loading {

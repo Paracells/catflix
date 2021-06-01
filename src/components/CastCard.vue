@@ -21,7 +21,7 @@
       </div>
 
     </div>
-    <div class="text-white text-4xl ml-5 mt-5 font-semibold text-purple-400">
+    <div class="header__card">
       Cast
     </div>
     <div class="mt-6 ml-5 p-10 inline-block bg-gray-800 rounded-lg bg-opacity-50">
@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("movies", ['getCurrentMovie', 'getMovies', 'getCast']),
+    ...mapGetters("movies", ['getCurrentMovie', 'getCast']),
     movie() {
       return this.getCurrentMovie;
     },
