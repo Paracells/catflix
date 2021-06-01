@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "../views/Home.vue";
 import TheMovie from "../views/TheMovie.vue";
-import AppCatalog from "../components/AppCatalog.vue";
+import AppCatalog from "../components/catalog/AppCatalog.vue";
 import NotFound from "../components/NotFound.vue";
 import store from '../store'
 

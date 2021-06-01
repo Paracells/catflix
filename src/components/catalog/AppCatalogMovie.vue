@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {calcLength} from "../utils";
+import {calcLength} from "../../utils";
 
 export default {
   name: "AppMovie",
