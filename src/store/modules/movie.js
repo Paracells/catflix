@@ -33,9 +33,10 @@ const movie = {
             state.movie = payload;
         },
         setCredits(state, payload) {
-            state.credits = payload;
+            state.credits = payload
         },
         setCrew(state, payload) {
+            // state.crew = payload.length === 0 ? ['no data'] : payload
             state.crew = payload
         },
         setKeywords(state, payload) {
@@ -71,7 +72,7 @@ const movie = {
             commit("setKeywords", result.keywords);
         },
 
-       
+
     },
 }
 

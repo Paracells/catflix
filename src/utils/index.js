@@ -25,6 +25,7 @@ export function calcLength(line) {
  */
 export function getImage(id, key) {
     const image = id[key]
+    console.log(image)
     if (image) {
         return "https://image.tmdb.org/t/p/w500/" + image
     }

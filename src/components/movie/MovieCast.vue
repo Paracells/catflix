@@ -29,6 +29,7 @@ import {mapGetters} from 'vuex'
 import {calcLength} from "../../utils";
 import {getImage} from "../../utils";
 
+
 export default {
   name: "CastCard.vue",
   data() {
