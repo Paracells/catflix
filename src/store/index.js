@@ -1,9 +1,10 @@
 import {createStore} from 'vuex'
 import movies from "./modules/movies";
+import movie from "./modules/movie";
 
 export default createStore({
 
-    modules: {movies}
+    modules: {movies, movie}
 })
 
 

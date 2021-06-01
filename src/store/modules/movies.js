@@ -4,10 +4,7 @@ const movies = {
     namespaced: true,
     state: {
         movies: [],
-        movie: "",
-        credits: '',
-        crew: [],
-        keywords: []
+
     },
     getters: {
         getMovies: (state) => state.movies,
@@ -15,43 +12,15 @@ const movies = {
             const result = state.movies.find((movie) => movie.id === +id);
             return result
         },
-        getCurrentMovie: (state) => {
-            return state.movie;
-        },
-        getCast: (state) => {
-            return state.credits;
-        },
-        getCrew: (state) => {
-            return {
-                director: state.crew.filter(el => el.known_for_department === 'Directing').map(el => el.name).join(', '),
-                writing: state.crew.filter(el => el.known_for_department === 'Writing').map(el => el.name).join(', ')
 
-
-            }
-        },
-        getKeywords: (state) => {
-            return state.keywords.map(el => el.name)
-        }
 
     },
     mutations: {
         setMovies(state, payload) {
             state.movies = payload;
         },
-        setMovie(state, payload) {
-            state.movie = payload;
-        },
-        setCredits(state, payload) {
-            state.credits = payload;
-        },
-        setCrew(state, payload) {
-            state.crew = payload
-        },
-        setKeywords(state, payload) {
-            state.keywords = payload
-        }
+        
     },
-    //todo добавить анимацию на загрузку и проверку ошибок
     actions: {
         async getFilms({commit}) {
             const result = await fetch(
@@ -61,32 +30,7 @@ const movies = {
             ).then((data) => data.json());
             commit("setMovies", result.results);
         },
-        async getFilm({commit}, id) {
-            const result = await fetch(
-                `${BASE_URL}${id}?api_key=${
-                    import.meta.env.VITE_APP_MOVIE_API_KEY
-                }&language=en-US`
-            ).then((data) => data.json());
-            commit("setMovie", result);
-        },
 
-        async getCredits({commit}, id) {
-            const result = await fetch(
-                `${BASE_URL}${id}/credits?api_key=${
-                    import.meta.env.VITE_APP_MOVIE_API_KEY
-                }&language=en-US`
-            ).then((data) => data.json());
-            commit("setCrew", result.crew);
-            commit("setCredits", result.cast.splice(0, 5));
-        },
-        async getKeywords({commit}, id) {
-            const result = await fetch(
-                `${BASE_URL}${id}/keywords?api_key=${
-                    import.meta.env.VITE_APP_MOVIE_API_KEY
-                }&language=en-US`
-            ).then((data) => data.json());
-            commit("setKeywords", result.keywords);
-        },
 
         // search films
         async searchFilms({commit}, searchString) {

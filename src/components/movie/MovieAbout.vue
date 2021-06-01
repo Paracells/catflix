@@ -42,7 +42,7 @@ import {mapGetters} from "vuex";
 export default {
   name: "AboutFilm",
   computed: {
-    ...mapGetters("movies", {movie: 'getCurrentMovie', crew: 'getCrew', keywords: 'getKeywords'}),
+    ...mapGetters("movie", {movie: 'getCurrentMovie', crew: 'getCrew', keywords: 'getKeywords'}),
 
   }
 }

@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("movies", ['getFilm', "getCredits", 'getKeywords']),
+    ...mapActions("movie", ['getFilm', "getCredits", 'getKeywords']),
 
   },
   async created() {

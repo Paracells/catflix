@@ -66,7 +66,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("movies", {movie: 'getCurrentMovie'}),
+    ...mapGetters("movie", {movie: 'getCurrentMovie'}),
 
     overView() {
       if (this.movie) {

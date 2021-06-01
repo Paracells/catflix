@@ -72,7 +72,7 @@ export default {
         await this.searchFilms(this.searchText)
       } else {
         if (this.getMovies.length === 0) {
-          await this.getFilms()
+          await this.getFilms
         }
       }
     }
