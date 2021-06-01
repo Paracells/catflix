@@ -1,12 +1,12 @@
 <template>
-  <div class="relative" @mouseover="show = true" @mouseout="show = false">
+  <div class="relative" @mouseover="show = true" @mouseout="show = false" v-if="!loadingSpinner">
     <router-link :to="{ name: 'TheMovie', params: { id: movie.id } }">
       <div class="bg-gray-800 shadow-md rounded-3xl p-2 cursor-pointer">
-        <img loading="lazy"
-             :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-             :alt="movie.original_title"
-             class="h-auto rounded-2xl object-fit w-full transform transition duration-500"
-             :class="imgHover"
+        <img
+            :src="imageLink"
+            :alt="movie.original_title"
+            class="rounded-2xl w-full transform transition duration-500"
+            :class="imgHover"
         />
       </div>
     </router-link>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {calcLength} from "../../utils";
+import {calcLength, getImage} from "../../utils";
 
 export default {
   name: "AppMovie",
@@ -37,6 +37,8 @@ export default {
       imgHover: "",
       linkHover: "",
       titleHover: "",
+      loadingSpinner: false,
+      imageLink: ''
     };
   },
 
@@ -52,6 +54,14 @@ export default {
         this.titleHover = "";
       }
     },
+  },
+  async created() {
+    this.loadingSpinner = true
+    const result = getImage(this.movie, 'poster_path')
+    this.imageLink = result
+  },
+  mounted() {
+    this.loadingSpinner = false
   },
   computed: {
     overView() {

@@ -24,14 +24,15 @@
     </nav>
 
     <!-- Search field -->
-    <form class="mb-4 w-full md:mb-0 md:w-1/4">
+    <div class="mb-4 w-full md:mb-0 md:w-1/4">
       <input
           class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white"
           placeholder="Search a movie..."
           type="text"
+          v-model="searchText"
+          @keyup.enter="loadFilms"
       />
-      <button class="hidden">Submit</button>
-    </form>
+    </div>
 
     <div>
       <button @click="showModal = true" class="btn-header">Login</button>
@@ -50,6 +51,7 @@
 <script>
 import AppLogin from "@/components/auth/AppLogin.vue";
 import AppSignup from "@/components/auth/AppSignup.vue";
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   components: {AppLogin, AppSignup},
@@ -57,12 +59,23 @@ export default {
     return {
       showModal: false,
       showSignup: false,
+      searchText: ''
     };
   },
+  computed: {
+    ...mapGetters('movies', ['getMovies'])
+  },
   methods: {
-    loginModal() {
-      this.showModal = true;
-    },
+    ...mapActions('movies', ['searchFilms', 'getFilms']),
+    loadFilms() {
+      if (this.searchText) {
+        this.searchFilms(this.searchText)
+      } else {
+        if (this.getMovies.length === 0) {
+          this.getFilms()
+        }
+      }
+    }
   },
 };
 </script>

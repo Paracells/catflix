@@ -2,16 +2,14 @@
   <div v-if="loading" class="flex justify-center items-center h-screen w-full">
     <div id="loading"></div>
   </div>
-  <div v-else>
+  <div v-else v-cloak>
     <app-navbar/>
     <div>
       <ul
           class="grid mt-8 gap-8 xl:grid-cols-4 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mr-4 ml-4"
       >
         <li class="" v-for="movie in getMovies" :key="movie.id">
-          <transition name="fade">
-            <app-movie :movie="movie"/>
-          </transition>
+          <app-movie :movie="movie"/>
         </li>
       </ul>
     </div>
@@ -40,9 +38,13 @@ export default {
   },
   async created() {
     this.loading = true
-    await this.getFilms();
-    this.loading = false
+    if (this.getMovies.length === 0) {
+      await this.getFilms();
+    }
   },
+  mounted() {
+    this.loading = false
+  }
 };
 </script>
 

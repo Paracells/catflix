@@ -9,8 +9,8 @@
           <template
               class="flex flex-col bg-purple-50-500 p-1 bg-opacity-20 ring-4 rounded-md ring-gray-900 relative hover:ring-gray-700">
             <img class="w-48 h-48 object-cover rounded-md"
-                 :src="getProfilePhoto(i)"
-                 :alt="i.original_name">
+                 :src="getImage(i, 'profile_path')"
+                 :alt=" i.original_name">
             <p class="text-white text-center mt-4 absolute bottom-16 -right-2 uppercase ring-4 ring-gray-800 p-2 bg-red-600">
               {{ i.original_name }}</p>
             <p class="text-white m-4 text-center p-2 bg-indigo-600 bg-opacity-20">
@@ -25,10 +25,9 @@
 </template>
 
 <script>
-
-import {mapActions, mapGetters} from 'vuex'
-import noPhoto from '../../assets/no-photo.jpg'
+import {mapGetters} from 'vuex'
 import {calcLength} from "../../utils";
+import {getImage} from "../../utils";
 
 export default {
   name: "CastCard.vue",
@@ -48,16 +47,7 @@ export default {
     },
   },
   methods: {
-
-    getProfilePhoto(id) {
-      const profilePhoto = id.profile_path
-      if (profilePhoto) {
-        this.photo = "https://image.tmdb.org/t/p/original/" + profilePhoto
-        return "https://image.tmdb.org/t/p/original/" + profilePhoto
-      } else {
-        return noPhoto
-      }
-    }
+    getImage
   },
 
 }
