@@ -24,7 +24,11 @@
     }
 
     .header__card {
-        @apply text-white text-4xl ml-5 mt-5 font-semibold text-purple-400
+        @apply font-headline tracking-wider text-white text-4xl ml-5 mt-5 font-semibold text-purple-400
+    }
+
+    .chips {
+        @apply py-2 px-2 text-center rounded-lg bg-indigo-600
     }
 }
 
@@ -49,4 +53,12 @@
     to {
         -webkit-transform: rotate(360deg);
     }
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }

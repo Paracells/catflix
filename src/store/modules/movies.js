@@ -6,7 +6,8 @@ const movies = {
         movies: [],
         movie: "",
         credits: '',
-        crew: []
+        crew: [],
+        keywords: []
     },
     getters: {
         getMovies: (state) => state.movies,
@@ -21,13 +22,15 @@ const movies = {
             return state.credits;
         },
         getCrew: (state) => {
-            console.log(state.crew.filter(el => el.known_for_department === 'Directing'));
             return {
                 director: state.crew.filter(el => el.known_for_department === 'Directing').map(el => el.name).join(', '),
                 writing: state.crew.filter(el => el.known_for_department === 'Writing').map(el => el.name).join(', ')
 
 
             }
+        },
+        getKeywords: (state) => {
+            return state.keywords.map(el => el.name)
         }
 
     },
@@ -43,6 +46,9 @@ const movies = {
         },
         setCrew(state, payload) {
             state.crew = payload
+        },
+        setKeywords(state, payload) {
+            state.keywords = payload
         }
     },
     //todo добавить анимацию на загрузку и проверку ошибок
@@ -61,6 +67,7 @@ const movies = {
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }&language=en-US`
             ).then((data) => data.json());
+            console.log(result)
             commit("setMovie", result);
         },
 
@@ -73,6 +80,15 @@ const movies = {
             commit("setCrew", result.crew);
             commit("setCredits", result.cast.splice(0, 5));
         },
+        async getKeywords({commit}, id) {
+            const result = await fetch(
+                `${BASE_URL}${id}/keywords?api_key=${
+                    import.meta.env.VITE_APP_MOVIE_API_KEY
+                }&language=en-US`
+            ).then((data) => data.json());
+            console.log(result)
+            commit("setKeywords", result.keywords);
+        },
     },
 };
 
@@ -84,3 +100,6 @@ export default movies;
 // https://api.themoviedb.org/3/movie/615457?api_key=b3e942d847688e6b6bd1c089a678e6be&language=en-US
 
 // https://api.themoviedb.org/3/movie/503736/credits?api_key=b3e942d847688e6b6bd1c089a678e6be&language=en-US\ get details
+
+
+// https://api.themoviedb.org/3/movie/503736/keywords?api_key=b3e942d847688e6b6bd1c089a678e6be - keywords

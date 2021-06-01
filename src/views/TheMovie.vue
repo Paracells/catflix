@@ -6,6 +6,7 @@
     <movie-header/>
     <movie-cast/>
     <movie-about/>
+
   </div>
 </template>
 <script>
@@ -24,13 +25,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions("movies", ['getFilm', "getCredits"]),
+    ...mapActions("movies", ['getFilm', "getCredits", 'getKeywords']),
 
   },
   async created() {
     this.loading = true
     await this.getFilm(this.$route.params.id)
     await this.getCredits(this.$route.params.id)
+    await this.getKeywords(this.$route.params.id)
     this.loading = false
   }
 
