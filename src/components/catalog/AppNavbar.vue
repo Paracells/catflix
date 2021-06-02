@@ -1,24 +1,30 @@
 <template>
   <header
-      class="border-b md:flex md:items-center md:justify-between p-4 pb-0 md:pb-4 bg-gray-700 bg-opacity-80"
+    class="border-b md:flex md:items-center md:justify-between p-4 pb-0 md:pb-4 bg-gray-700 bg-opacity-80"
   >
     <nav>
-      <ul class="list-reset md:flex md:items-center">
-        <li class="md:ml-4">
-          <a @click="backToNowPlaying"
-             class="text-white block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
-             href="#"
+      <ul class="list-reset flex md:items-center">
+        <li class="mr-4">
+          <a
+            @click="backToNowPlaying"
+            class="text-white block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
+            href="#"
           >
             Home
           </a>
         </li>
-        <li class="md:ml-4">
+        <li>
           <a
-              class="text-white border-t block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
-              href="#"
+            class="text-white border-t block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
+            href="#"
           >
             My Favorites
           </a>
+        </li>
+        <li
+          class="bg-indigo-500 h-4 w-4 text-white text-center font-extrabold flex items-center justify-center rounded-full"
+        >
+          {{ favorites.length }}
         </li>
       </ul>
     </nav>
@@ -26,63 +32,63 @@
     <!-- Search field -->
     <div class="mb-4 w-full md:mb-0 md:w-1/4">
       <input
-          class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white"
-          placeholder="Search a movie..."
-          type="text"
-          v-model="searchText"
-          @keyup.enter="loadFilms"
+        class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white"
+        placeholder="Search a movie..."
+        type="text"
+        v-model="searchText"
+        @keyup.enter="loadFilms"
       />
     </div>
 
     <div>
       <button @click="showModal = true" class="btn-header">Login</button>
-      <button @click="showSignup = true" class="btn-header hover:bg-blue-400">Signup</button>
+      <button @click="showSignup = true" class="btn-header hover:bg-blue-400">
+        Signup
+      </button>
       <transition name="fade">
-        <app-login v-if="showModal" @close="showModal = false"/>
+        <app-login v-if="showModal" @close="showModal = false" />
       </transition>
       <transition name="fade">
-        <app-signup v-if="showSignup" @close="showSignup = false"/>
+        <app-signup v-if="showSignup" @close="showSignup = false" />
       </transition>
     </div>
   </header>
-
 </template>
 
 <script>
 import AppLogin from "@/components/auth/AppLogin.vue";
 import AppSignup from "@/components/auth/AppSignup.vue";
-import {mapActions, mapGetters} from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  components: {AppLogin, AppSignup},
+  components: { AppLogin, AppSignup },
   data() {
     return {
       showModal: false,
       showSignup: false,
-      searchText: ''
+      searchText: "",
     };
   },
   computed: {
-    ...mapGetters('movies', ['getMovies', ''])
+    ...mapGetters("movies", ["getMovies"]),
+    ...mapGetters("user", { favorites: "getFavorites" }),
   },
   methods: {
-    ...mapActions('movies', ['searchFilms', 'getFilms']),
+    ...mapActions("movies", ["searchFilms", "getFilms"]),
     async loadFilms() {
       if (this.searchText) {
-        this.$store.commit('movies/setFilter', '')
-        await this.searchFilms(this.searchText)
+        this.$store.commit("movies/setFilter", "");
+        await this.searchFilms(this.searchText);
       } else {
-        this.backToNowPlaying()
+        this.backToNowPlaying();
       }
     },
     backToNowPlaying() {
       if (this.getMovies.length === 0) {
-        this.getFilms("now_playing")
+        this.getFilms("now_playing");
       }
-    }
-
+    },
   },
-
 };
 </script>
 <style lang="scss" scoped>
