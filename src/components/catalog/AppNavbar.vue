@@ -3,7 +3,7 @@
     class="border-b md:flex md:items-center md:justify-between p-4 pb-0 md:pb-4 bg-gray-700 bg-opacity-80"
   >
     <nav>
-      <ul class="list-reset flex md:items-center">
+      <ul class="list-reset flex items-center">
         <li class="mr-4">
           <a
             @click="backToNowPlaying"
@@ -13,7 +13,7 @@
             Home
           </a>
         </li>
-        <li>
+        <li class="mr-1">
           <a
             class="text-white border-t block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
             href="#"
@@ -22,7 +22,7 @@
           </a>
         </li>
         <li
-          class="bg-indigo-500 h-4 w-4 text-white text-center font-extrabold flex items-center justify-center rounded-full"
+          class="bg-red-500 h-5 w-5 mb-4 text-white text-center flex items-center justify-center rounded-full"
         >
           {{ favorites.length }}
         </li>
