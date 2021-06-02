@@ -11,7 +11,7 @@
           <h2 class="-mt-2 text-center text-3xl font-extrabold text-gray-300">
             Sign in to your account
           </h2>
-          <svg @click="close"
+          <svg @click="$emit('close')"
                class="w-8 h-8 cursor-pointer text-red-300"
                fill="none"
                stroke="currentColor"
@@ -69,7 +69,7 @@
                   id="remember_me"
                   name="remember_me"
                   type="checkbox"
-                  checked
+                  v-model="checked"
                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
               <label for="remember_me" class="ml-2 block text-sm text-gray-300">
@@ -77,14 +77,7 @@
               </label>
             </div>
 
-            <div class="text-sm">
-              <a
-                  href="#"
-                  class="font-medium text-indigo-200 hover:text-indigo-400"
-              >
-                Forgot your password?
-              </a>
-            </div>
+
           </div>
 
           <div>
@@ -107,17 +100,20 @@ export default {
   emits: ["close"],
   data() {
 
+
     const loginForm = object({
       email: string().required().email(),
       password: string().required().min(8)
     })
 
     return {
-      loginForm
+      loginForm,
+      checked: true
     }
   },
   methods: {
-    close() {
+    close(values) {
+      console.log(values, this.checked)
       this.$emit("close");
     },
   },

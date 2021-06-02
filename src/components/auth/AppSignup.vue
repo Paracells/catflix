@@ -11,7 +11,7 @@
           <h2 class="-mt-2 text-center text-3xl font-extrabold text-gray-300">
             Create CatFlix account
           </h2>
-          <svg @click="close"
+          <svg @click="$emit('close')"
                class="w-8 h-8 cursor-pointer text-red-300"
                fill="none"
                stroke="currentColor"
@@ -83,29 +83,32 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import {Form, Field, ErrorMessage} from "vee-validate";
 import {object, string} from 'yup'
+import {markRaw} from 'vue'
 
 export default {
   emits: ["close"],
   components: {Form, Field, ErrorMessage},
   data() {
 
-    const signUpForm = object({
+    const signUpForm = markRaw(object().shape({
       name: string().required().min(3),
       email: string().required().email(),
-      password: string().required().min(8)
-    })
+      password: string().required().min(6)
+    }))
 
     return {
       signUpForm
     }
   },
   methods: {
-    close() {
+    close(values) {
+      console.log(values)
       this.$emit("close");
     },
   },
