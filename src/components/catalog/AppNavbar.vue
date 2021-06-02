@@ -5,9 +5,9 @@
     <nav>
       <ul class="list-reset md:flex md:items-center">
         <li class="md:ml-4">
-          <a
-              class="text-white block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
-              href="#"
+          <a @click="backToNowPlaying"
+             class="text-white block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
+             href="#"
           >
             Home
           </a>
@@ -71,12 +71,17 @@ export default {
       if (this.searchText) {
         await this.searchFilms(this.searchText)
       } else {
-        if (this.getMovies.length === 0) {
-          await this.getFilms
-        }
+        this.backToNowPlaying()
+      }
+    },
+    backToNowPlaying() {
+      if (this.getMovies.length === 0) {
+        this.getFilms()
       }
     }
+
   },
+
 };
 </script>
 <style lang="scss" scoped>

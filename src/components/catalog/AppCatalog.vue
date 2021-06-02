@@ -38,7 +38,6 @@ export default {
     ...mapGetters("movies", ["getMovies"]),
   },
   async created() {
-    console.log(1)
     this.loading = true
     if (this.getMovies.length === 0) {
       await this.getFilms();
