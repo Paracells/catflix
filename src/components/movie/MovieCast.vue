@@ -31,7 +31,7 @@ import {getImage} from "../../utils";
 
 
 export default {
-  name: "CastCard.vue",
+  name: "MovieCast",
   data() {
     return {
       photo: ''

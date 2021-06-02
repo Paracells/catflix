@@ -4,11 +4,11 @@
   </div>
   <div class="relative" @mouseover="show = true" @mouseout="show = false" v-else>
     <router-link :to="{ name: 'TheMovie', params: { id: movie.id } }">
-      <div class="bg-gray-800 shadow-md rounded-3xl p-2 cursor-pointer">
+      <div class="bg-gray-800 shadow-md rounded-3xl p-2 cursor-pointer h-full">
         <img
             :src="imageLink"
             :alt="movie.original_title"
-            class="rounded-2xl w-full transform transition duration-500"
+            class="rounded-2xl w-full transform transition duration-500 h-auto object-cover"
             :class="imgHover"
         />
       </div>
