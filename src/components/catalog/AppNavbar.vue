@@ -63,12 +63,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('movies', ['getMovies'])
+    ...mapGetters('movies', ['getMovies', ''])
   },
   methods: {
     ...mapActions('movies', ['searchFilms', 'getFilms']),
     async loadFilms() {
       if (this.searchText) {
+        this.$store.commit('movies/setFilter', '')
         await this.searchFilms(this.searchText)
       } else {
         this.backToNowPlaying()
