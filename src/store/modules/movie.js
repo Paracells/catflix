@@ -1,4 +1,5 @@
 import {BASE_URL, BASE_URL_SEARCH} from "../../utils";
+import axios from "../../api";
 
 const movie = {
     namespaced: true,
@@ -46,30 +47,26 @@ const movie = {
     actions: {
 
         async getFilm({commit}, id) {
-            const result = await fetch(
-                `${BASE_URL}${id}?api_key=${
-                    import.meta.env.VITE_APP_MOVIE_API_KEY
-                }&language=en-US`
-            ).then((data) => data.json());
-            commit("setMovie", result);
+            const result = await axios.get(`${id}?api_key=${
+                import.meta.env.VITE_APP_MOVIE_API_KEY
+            }&language=en-US`).catch(() => null)
+            if (result) {
+                commit("setMovie", result.data);
+            }
         },
 
         async getCredits({commit}, id) {
-            const result = await fetch(
-                `${BASE_URL}${id}/credits?api_key=${
-                    import.meta.env.VITE_APP_MOVIE_API_KEY
-                }&language=en-US`
-            ).then((data) => data.json());
-            commit("setCrew", result.crew);
-            commit("setCredits", result.cast.splice(0, 5));
+            const result = await axios.get(`${id}/credits?api_key=${
+                import.meta.env.VITE_APP_MOVIE_API_KEY
+            }&language=en-US`)
+            commit("setCrew", result.data.crew);
+            commit("setCredits", result.data.cast.splice(0, 5));
         },
         async getKeywords({commit}, id) {
-            const result = await fetch(
-                `${BASE_URL}${id}/keywords?api_key=${
-                    import.meta.env.VITE_APP_MOVIE_API_KEY
-                }&language=en-US`
-            ).then((data) => data.json());
-            commit("setKeywords", result.keywords);
+            const result = await axios.get(`${id}/keywords?api_key=${
+                import.meta.env.VITE_APP_MOVIE_API_KEY
+            }&language=en-US`)
+            commit("setKeywords", result.data.keywords);
         },
 
 

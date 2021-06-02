@@ -13,7 +13,7 @@
 import MovieCast from "../components/movie/MovieCast.vue";
 import MovieAbout from "../components/movie/MovieAbout.vue";
 import MovieHeader from "../components/movie/MovieHeader.vue";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: 'TheMovie',
@@ -27,11 +27,18 @@ export default {
     ...mapActions("movie", ['getFilm', "getCredits", 'getKeywords']),
 
   },
+  computed: {
+    ...mapGetters("movie", ['getCurrentMovie'])
+  },
   async created() {
     this.loading = true
     await this.getFilm(this.$route.params.id)
-    await this.getCredits(this.$route.params.id)
-    await this.getKeywords(this.$route.params.id)
+    if (!this.getCurrentMovie) {
+      await this.$router.push({name: "NotFound"})
+    } else {
+      await this.getCredits(this.$route.params.id)
+      await this.getKeywords(this.$route.params.id)
+    }
     this.loading = false
   }
 
