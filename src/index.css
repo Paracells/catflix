@@ -30,6 +30,11 @@
     .chips {
         @apply py-2 px-2 text-center rounded-lg bg-indigo-600
     }
+
+    .button__filter {
+        @apply bg-indigo-900 bg-opacity-40 shadow-xl px-2 py-1 rounded-lg ring-2 ring-offset-blue-800 ring-gray-700 mt-5 cursor-pointer hover:bg-blue-900 hover:bg-opacity-100 transition
+    }
+
 }
 
 

@@ -4,6 +4,7 @@
   </div>
   <div v-else>
     <app-navbar/>
+    <app-filter/>
     <div v-if="getMovies.length!==0">
 
       <transition-group name="fade" tag="ul" mode="out-in"
@@ -22,10 +23,11 @@
 import {mapActions, mapGetters} from "vuex";
 import AppMovie from "./AppCatalogMovie.vue";
 import AppNavbar from "./AppNavbar.vue";
+import AppFilter from "./AppFilter.vue";
 
 export default {
   name: "AppCatalog",
-  components: {AppNavbar, AppMovie},
+  components: {AppNavbar, AppMovie, AppFilter},
   data() {
     return {
       loading: false
@@ -40,7 +42,7 @@ export default {
   async created() {
     this.loading = true
     if (this.getMovies.length === 0) {
-      await this.getFilms();
+      await this.getFilms("now_playing");
     }
     this.loading = false
 

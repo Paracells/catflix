@@ -4,14 +4,12 @@ const movies = {
     namespaced: true,
     state: {
         movies: [],
+        filteredClass: ''
 
     },
     getters: {
         getMovies: (state) => state.movies,
-        getById: (state) => (id) => {
-            const result = state.movies.find((movie) => movie.id === +id);
-            return result
-        },
+        getFilter: (state) => state.filteredClass
 
 
     },
@@ -19,12 +17,15 @@ const movies = {
         setMovies(state, payload) {
             state.movies = payload;
         },
-        
+        setFilter(state, payload) {
+            state.filteredClass = payload
+        }
+
     },
     actions: {
-        async getFilms({commit}) {
+        async getFilms({commit}, filter) {
             const result = await fetch(
-                `${BASE_URL}now_playing?api_key=${
+                `${BASE_URL}${filter}?api_key=${
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }`
             ).then((data) => data.json());

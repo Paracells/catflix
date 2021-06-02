@@ -4,7 +4,8 @@
   </div>
   <div class="relative" @mouseover="show = true" @mouseout="show = false" v-else>
     <router-link :to="{ name: 'TheMovie', params: { id: movie.id } }">
-      <div class="bg-gray-800 shadow-md rounded-3xl p-2 cursor-pointer">
+      <div
+          class="bg-gray-800 rounded-3xl p-2 cursor-pointer ring-2">
         <img
             :src="imageLink"
             :alt="movie.original_title"
