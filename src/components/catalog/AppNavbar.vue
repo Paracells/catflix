@@ -76,7 +76,7 @@ export default {
     },
     backToNowPlaying() {
       if (this.getMovies.length === 0) {
-        this.getFilms()
+        this.getFilms("now_playing")
       }
     }
 

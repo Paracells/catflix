@@ -4,7 +4,7 @@ const movies = {
     namespaced: true,
     state: {
         movies: [],
-        filteredClass: ''
+        filteredClass: 'now_playing'
 
     },
     getters: {

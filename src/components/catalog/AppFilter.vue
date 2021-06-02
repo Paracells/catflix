@@ -1,10 +1,17 @@
 <template>
   <div>
     <ul class="mt-4 uppercase mr-4 space-x-4 flex justify-end">
-      <li v-for="f in filteredArray" :key="f.name" class="button__filter" @click="filterPath(f)"
-          :class="{'bg-green-500 hover:bg-green-800':filter===f}">{{
-          f.filter
-        }}
+      <li class="button__filter" @click="filterPath('now_playing')"
+          :class="{'bg-green-500 hover:bg-green-800':filter==='now_playing'}">NOW PLAYING
+      </li>
+      <li class="button__filter" @click="filterPath('popular')"
+          :class="{'bg-green-500 hover:bg-green-800':filter==='popular'}">POPULAR
+      </li>
+      <li class="button__filter" @click="filterPath('top_rated')"
+          :class="{'bg-green-500 hover:bg-green-800':filter==='top_rated'}">TOP RATED
+      </li>
+      <li class="button__filter" @click="filterPath('upcoming')"
+          :class="{'bg-green-500 hover:bg-green-800':filter==='upcoming'}">UPCOMING
       </li>
 
     </ul>
@@ -35,7 +42,7 @@ export default {
   methods: {
     filterPath(filter) {
       this.$store.commit('movies/setFilter', filter)
-      this.$store.dispatch("movies/getFilms", filter.name)
+      this.$store.dispatch("movies/getFilms", filter)
     }
   },
   mounted() {
