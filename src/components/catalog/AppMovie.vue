@@ -1,8 +1,5 @@
 <template>
-  <div v-if="loadingSpinner" class="flex justify-center items-center h-screen w-full">
-    <div id="loading"></div>
-  </div>
-  <div class="relative" @mouseover="show = true" @mouseout="show = false" v-else>
+  <div class="relative" @mouseover="show = true" @mouseout="show = false">
     <router-link :to="{ name: 'TheMovie', params: { id: movie.id } }">
       <div
           class="bg-gray-800 rounded-3xl p-2 cursor-pointer ring-2">
@@ -41,7 +38,7 @@ export default {
       imgHover: "",
       linkHover: "",
       titleHover: "",
-      loadingSpinner: false,
+      loading: false,
       imageLink: ''
     };
   },
@@ -60,7 +57,6 @@ export default {
     },
   },
   async created() {
-    this.loadingSpinner = true
     const result = getImage(this.movie, 'poster_path')
     this.imageLink = result
   },
@@ -68,10 +64,6 @@ export default {
     overView() {
       return calcLength(this.movie.overview)
     },
-  },
-  mounted() {
-    this.loadingSpinner = false
-
   },
   watch: {
     show() {

@@ -89,15 +89,20 @@ export default {
     },
     backToNowPlaying() {
       if (this.status) {
-        console.log(this.$store.getters.getSavedFromFavorites)
-        this.$store.commit('movies/setMovies', this.getSavedFromFavorites)
         this.$store.commit('user/resetFavoritePage')
-
+        if (this.getSavedFromFavorites.length === 0) {
+          this.resetFilter()
+        } else {
+          this.$store.commit('movies/setMovies', this.getSavedFromFavorites)
+        }
       } else {
-        const filter = this.getFilter ? this.getFilter : "now_playing"
-        this.$store.commit('movies/setFilter', filter)
-        this.getFilms(this.getFilter ? this.getFilter : filter);
+        this.resetFilter()
       }
+    },
+    resetFilter() {
+      const filter = this.getFilter ? this.getFilter : "now_playing"
+      this.$store.commit('movies/setFilter', filter)
+      this.getFilms(this.getFilter ? this.getFilter : filter);
     },
     gotoFavorites() {
 
