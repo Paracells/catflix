@@ -24,13 +24,15 @@ import {mapActions, mapGetters} from "vuex";
 import AppMovie from "./AppCatalogMovie.vue";
 import AppNavbar from "./AppNavbar.vue";
 import AppFilter from "./AppFilter.vue";
+import Notification from '../Notification.vue'
 
 export default {
   name: "AppCatalog",
-  components: {AppNavbar, AppMovie, AppFilter},
+  components: {Notification, AppNavbar, AppMovie, AppFilter},
   data() {
     return {
-      loading: false
+      loading: false,
+      messages: [{name: 'notification name', id: Date.now().toLocaleString()}]
     };
   },
   methods: {

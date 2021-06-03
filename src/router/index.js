@@ -3,7 +3,6 @@ import Home from "../views/Home.vue";
 import TheMovie from "../views/TheMovie.vue";
 import AppCatalog from "../components/catalog/AppCatalog.vue";
 import NotFound from "../components/NotFound.vue";
-import store from '../store'
 
 const routes = [
     {

@@ -19,6 +19,9 @@ const movies = {
         },
         setFilter(state, payload) {
             state.filteredClass = payload
+        },
+        removeById(state, id) {
+            state.movies = state.movies.filter(el => el.id !== +id)
         }
 
     },
