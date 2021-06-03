@@ -41,7 +41,7 @@ export default {
   async created() {
     this.loading = true
     if (this.getMovies.length === 0) {
-      await this.getFilms(this.getFilter);
+      await this.getFilms(this.getFilter ? this.getFilter : 'now_playing');
     }
   },
   mounted() {

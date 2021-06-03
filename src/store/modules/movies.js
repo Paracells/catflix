@@ -4,12 +4,12 @@ const movies = {
     namespaced: true,
     state: {
         movies: [],
-        filteredClass: 'now_playing'
+        filteredClass: 'now_playing',
 
     },
     getters: {
         getMovies: (state) => state.movies,
-        getFilter: (state) => state.filteredClass
+        getFilter: (state) => state.filteredClass,
 
 
     },
@@ -20,6 +20,7 @@ const movies = {
         setFilter(state, payload) {
             state.filteredClass = payload
         },
+
         removeById(state, id) {
             state.movies = state.movies.filter(el => el.id !== +id)
         }
