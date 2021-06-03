@@ -21,10 +21,10 @@ import AppMovie from "./AppMovie.vue";
 
 
 export default {
-  components: {AppMovie},
+  components: {AppMovie,},
   name: "AppMovies",
   computed: {
-    ...mapGetters("movies", ["getMovies"]),
+    ...mapGetters("movies", ["getMovies", 'getFilter']),
 
   },
   data() {
@@ -37,10 +37,11 @@ export default {
     ...mapActions("movies", ["getFilms"]),
 
   },
+
   async created() {
     this.loading = true
     if (this.getMovies.length === 0) {
-      await this.getFilms("now_playing");
+      await this.getFilms(this.getFilter);
     }
   },
   mounted() {

@@ -113,7 +113,6 @@ export default {
   },
   methods: {
     close(values) {
-      console.log(values, this.checked)
       this.$emit("close");
     },
   },

@@ -85,7 +85,9 @@ export default {
       }
     },
     backToNowPlaying() {
-      this.getFilms(this.getFilter);
+      const filter = this.getFilter ? this.getFilter : "now_playing"
+      this.$store.commit('movies/setFilter', filter)
+      this.getFilms(this.getFilter ? this.getFilter : filter);
     },
     gotoFavorites() {
       this.$store.commit('user/setFavoritePage')

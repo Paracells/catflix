@@ -7,26 +7,17 @@
 </template>
 
 <script>
-import {mapActions, mapGetters, mapState} from "vuex";
 import AppNavbar from "./AppNavbar.vue";
-import AppFilter from "./AppFilter.vue";
-import Notification from '../Notification.vue'
 import AppMovies from "./AppMovies.vue";
+import AppFilter from "./AppFilter.vue";
 
 export default {
   name: "AppCatalog",
-  components: {AppMovies, Notification, AppNavbar, AppFilter},
+  components: {AppMovies, AppNavbar, AppFilter},
   data() {
     return {
       messages: [{name: 'notification name', id: Date.now().toLocaleString()}]
     };
-  },
-
-  computed: {
-    ...mapState('user', ['favoritePage']),
-    ...mapGetters("movies", ["getMovies"]),
-
-
   },
 
 

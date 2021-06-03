@@ -33,6 +33,7 @@ export default {
     ...mapGetters({filter: 'movies/getFilter'}),
 
   },
+
   methods: {
     filterPath(filter) {
       this.$store.commit('movies/setFilter', filter.name)

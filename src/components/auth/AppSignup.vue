@@ -108,7 +108,6 @@ export default {
   },
   methods: {
     close(values) {
-      console.log(values)
       this.$emit("close");
     },
   },
