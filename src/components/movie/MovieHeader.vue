@@ -95,7 +95,6 @@ export default {
       if (this.favorite) {
         this.$store.commit("user/removeFavorite", this.movie);
         if (this.page) {
-          console.log(1)
           this.$store.commit('movies/removeById', this.movie.id)
         }
       } else {
