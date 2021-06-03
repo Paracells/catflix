@@ -6,7 +6,7 @@
         <img
             :src="imageLink"
             :alt="movie.original_title"
-            class="rounded-2xl w-full transform transition duration-500 object-cover"
+            class="rounded-2xl w-full transform transition duration-500 object-cover h-[500px]"
             :class="imgHover"
         />
       </div>

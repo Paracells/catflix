@@ -2,9 +2,9 @@
   <div>
     <loader v-if="loading"/>
     <div v-else-if="getMovies.length!==0">
-      <transition-group name="list" tag="ul"
+      <transition-group name="fade" tag="ul" mode="out-in"
                         class="grid mt-8 gap-8 xl:grid-cols-4 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mr-4 ml-4">
-        <li name="list" tag="li" v-for="movie in getMovies" :key="movie.id">
+        <li v-for="movie in getMovies" :key="movie.id">
           <app-movie :movie="movie"/>
         </li>
       </transition-group>
@@ -53,8 +53,15 @@ export default {
 
 <style scoped>
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
 
-.list-move {
-  transition: transform 5s;
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-move {
+  transition: transform .5s;
 }
 </style>
