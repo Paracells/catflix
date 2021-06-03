@@ -5,11 +5,13 @@ const movies = {
     state: {
         movies: [],
         filteredClass: 'now_playing',
+        savedFromFavorites: ''
 
     },
     getters: {
         getMovies: (state) => state.movies,
         getFilter: (state) => state.filteredClass,
+        getSavedFromFavorites: (state) => state.savedFromFavorites
 
 
     },
@@ -21,8 +23,13 @@ const movies = {
             state.filteredClass = payload
         },
 
+
         removeById(state, id) {
             state.movies = state.movies.filter(el => el.id !== +id)
+        },
+        saveSearchMovies(state, payload) {
+            console.log('commit')
+            state.savedFromFavorites = payload
         }
 
     },

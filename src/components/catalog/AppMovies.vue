@@ -2,12 +2,12 @@
   <div>
     <loader v-if="loading"/>
     <div v-else-if="getMovies.length!==0">
-      <transition-group name="fade" tag="ul" mode="out-in"
-                        class="grid mt-8 gap-8 xl:grid-cols-4 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mr-4 ml-4">
+      <ul name="fade" tag="ul"
+          class="grid mt-8 gap-8 xl:grid-cols-4 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mr-4 ml-4">
         <li v-for="movie in getMovies" :key="movie.id">
           <app-movie :movie="movie"/>
         </li>
-      </transition-group>
+      </ul>
     </div>
     <div v-else class="flex items-center justify-center h-screen text-7xl font-medium">No data</div>
 

@@ -71,11 +71,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("movies", ["getMovies", "getFilter"]),
-    ...mapGetters("user", {favorites: "getFavorites"}),
+    ...mapGetters("movies", ["getMovies", "getFilter", 'getSavedFromFavorites']),
+    ...mapGetters("user", {favorites: "getFavorites", status: "getPageStatus"}),
   },
   methods: {
     ...mapActions("movies", ["searchFilms", "getFilms"]),
+
     async loadFilms() {
       if (this.searchText) {
         this.$store.commit("movies/setFilter", "");
@@ -87,16 +88,29 @@ export default {
       }
     },
     backToNowPlaying() {
-      const filter = this.getFilter ? this.getFilter : "now_playing"
-      this.$store.commit('movies/setFilter', filter)
-      this.getFilms(this.getFilter ? this.getFilter : filter);
+      if (this.status) {
+        console.log(this.$store.getters.getSavedFromFavorites)
+        this.$store.commit('movies/setMovies', this.getSavedFromFavorites)
+        this.$store.commit('user/resetFavoritePage')
+
+      } else {
+        const filter = this.getFilter ? this.getFilter : "now_playing"
+        this.$store.commit('movies/setFilter', filter)
+        this.getFilms(this.getFilter ? this.getFilter : filter);
+      }
     },
     gotoFavorites() {
+
       this.$store.commit('user/setFavoritePage')
+
+      this.$store.commit('movies/saveSearchMovies', this.getMovies)
+      console.log(this.getSavedFromFavorites)
       this.$store.commit('movies/setMovies', this.favorites)
     }
   },
-};
+
+}
+;
 </script>
 <style lang="scss" scoped>
 .fade-enter-active,
