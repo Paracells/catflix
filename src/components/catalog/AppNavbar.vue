@@ -80,6 +80,8 @@ export default {
       if (this.searchText) {
         this.$store.commit("movies/setFilter", "");
         await this.searchFilms(this.searchText);
+        this.searchText = ''
+
       } else {
         this.backToNowPlaying();
       }
