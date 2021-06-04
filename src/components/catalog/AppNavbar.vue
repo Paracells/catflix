@@ -124,12 +124,12 @@ export default {
       this.showSignup = false
       this.showSignIn = false
       if (name) {
-        this.username = this.getUserName
+        this.username = name
         this.logged = true
       }
     },
-    logout() {
-      this.$store.dispatch('user/logout')
+    async logout() {
+      await this.$store.dispatch('user/logout')
       if (!this.getError.status) {
         this.logged = false
       }
@@ -138,10 +138,11 @@ export default {
   },
   async created() {
     await this.$store.dispatch('user/navBarLoad')
-    console.log('this.getUserName', this.getUserName)
     if (this.getUserName) {
       this.username = this.getUserName
       this.logged = true
+    } else {
+      this.logged = false
     }
   }
 }

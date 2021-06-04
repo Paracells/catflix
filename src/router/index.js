@@ -1,8 +1,5 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "../views/Home.vue";
-import TheMovie from "../views/TheMovie.vue";
-import AppCatalog from "../components/catalog/AppCatalog.vue";
-import NotFound from "../components/NotFound.vue";
 
 const routes = [
     {
@@ -15,14 +12,15 @@ const routes = [
         // каталог фильмов
         path: "/movies",
         name: "AppCatalog",
-        component: AppCatalog,
+        component: () => import("../components/catalog/AppCatalog.vue"),
 
     },
     {
         // карточка-компонент отдельного фильма
         path: "/movies/:id",
         name: "TheMovie",
-        component: TheMovie,
+        component: () => import("../views/TheMovie.vue"),
+
 
         beforeEnter: (to, from, next) => {
             const result = /^\d+$/.test(to.params.id)
@@ -39,7 +37,8 @@ const routes = [
         // 404 по всем другим адресам
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: NotFound
+        component: () => import("../components/NotFound.vue"),
+
     },
 
 ];
