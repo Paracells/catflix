@@ -64,6 +64,7 @@
 import AppLogin from "@/components/auth/AppLogin.vue";
 import AppSignup from "@/components/auth/AppSignup.vue";
 import {mapActions, mapGetters} from "vuex";
+import {appAuth} from "../../config";
 
 export default {
   components: {AppLogin, AppSignup},
@@ -135,16 +136,14 @@ export default {
 
     }
   },
-  created() {
-    this.$store.dispatch('navBarLoad')
+  async created() {
+    await this.$store.dispatch('user/navBarLoad')
     console.log('this.getUserName', this.getUserName)
     if (this.getUserName) {
       this.username = this.getUserName
       this.logged = true
     }
-
-  },
-
+  }
 }
 </script>
 <style lang="scss" scoped>

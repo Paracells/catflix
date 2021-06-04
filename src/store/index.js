@@ -3,22 +3,11 @@ import movies from "./modules/movies";
 import movie from "./modules/movie";
 import fav from "./modules/fav";
 import user from "./modules/user";
-import {appAuth} from "../config";
 
 export default createStore({
 
     modules: {movies, movie, fav, user},
-    actions: {
-        navBarLoad({commit}) {
-            appAuth.onAuthStateChanged((user) => {
-                if (user) {
-                    console.log(user)
-                    commit('user/setUserData', user)
-                    commit('user/setError', {status: false, text: ''})
-                }
-            })
-        }
-    }
+
 })
 
 

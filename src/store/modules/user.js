@@ -20,8 +20,8 @@ const user = {
         }
     },
     actions: {
-        saveUser({commit}, values) {
-            appAuth.createUserWithEmailAndPassword(values.email, values.password)
+        async saveUser({commit}, values) {
+            await appAuth.createUserWithEmailAndPassword(values.email, values.password)
                 .then((u) => {
                     u.user.updateProfile({displayName: values.name})
                     commit('setUserData', u.user)
@@ -32,8 +32,8 @@ const user = {
 
                 })
         },
-        loadUser({commit}, values) {
-            appAuth.signInWithEmailAndPassword(values.email, values.password)
+        async loadUser({commit}, values) {
+            await appAuth.signInWithEmailAndPassword(values.email, values.password)
                 .then((u) => {
                     commit('setUserData', u.user)
                     commit('setError', {status: false, text: ''})
@@ -44,10 +44,20 @@ const user = {
                 })
 
         },
-        logout() {
-            appAuth.signOut().then(() => this.error = false).catch((err) => console.log(err.message))
+        navBarLoad({commit}) {
+            commit('setError', {status: false, text: ''})
+            appAuth.onAuthStateChanged((user) => {
+                if (user) {
+                    console.log(user)
+                    commit('setUserData', user)
+                    commit('setError', {status: false, text: ''})
+                }
+            })
         },
-        
+        async logout() {
+            await appAuth.signOut().then(() => this.error = false).catch((err) => console.log(err.message))
+        },
+
 
     }
 }

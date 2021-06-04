@@ -11,7 +11,7 @@
           <h2 class="-mt-2 text-center text-3xl font-extrabold text-gray-300">
             Sign in to your account
           </h2>
-          <svg @click="$emit('close')"
+          <svg @click="exitForm"
                class="w-8 h-8 cursor-pointer text-red-300"
                fill="none"
                stroke="currentColor"
@@ -99,9 +99,15 @@ export default {
     async close(values) {
       await this.$store.dispatch('user/loadUser', values)
       if (!this.getError.status) {
+
+
         this.$emit("close", this.getUserName);
       }
 
+    },
+    exitForm() {
+      this.$store.commit('user/setError', {status: false, text: false})
+      this.$emit('close')
     }
   }
 }

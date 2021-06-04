@@ -11,7 +11,7 @@
           <h2 class="-mt-2 text-center text-3xl font-extrabold text-gray-300">
             Create CatFlix account
           </h2>
-          <svg @click="$emit('close')"
+          <svg @click="exitForm"
                class="w-8 h-8 cursor-pointer text-red-300"
                fill="none"
                stroke="currentColor"
@@ -120,6 +120,10 @@ export default {
       }
 
     },
+    exitForm() {
+      this.$store.commit('user/setError', {status: false, text: false})
+      this.$emit('close')
+    }
   },
 };
 </script>
