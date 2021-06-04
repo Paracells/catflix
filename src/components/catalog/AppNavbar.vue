@@ -64,7 +64,6 @@
 import AppLogin from "@/components/auth/AppLogin.vue";
 import AppSignup from "@/components/auth/AppSignup.vue";
 import {mapActions, mapGetters} from "vuex";
-import {appAuth} from "../../config";
 
 export default {
   components: {AppLogin, AppSignup},
@@ -80,7 +79,8 @@ export default {
   },
   computed: {
     ...mapGetters("movies", ["getMovies", "getFilter", 'getSavedFromFavorites']),
-    ...mapGetters("user", {favorites: "getFavorites", status: "getPageStatus"}),
+    ...mapGetters("fav", {favorites: "getFavorites", status: "getPageStatus"}),
+    ...mapGetters('user', ['getUser', 'getError', 'getErrorText', 'getUserName'])
   },
   methods: {
     ...mapActions("movies", ["searchFilms", "getFilms"]),
@@ -97,7 +97,7 @@ export default {
     },
     backToNowPlaying() {
       if (this.status) {
-        this.$store.commit('user/resetFavoritePage')
+        this.$store.commit('fav/resetFavoritePage')
         if (this.getSavedFromFavorites.length === 0) {
           this.resetFilter()
         } else {
@@ -114,44 +114,42 @@ export default {
     },
     gotoFavorites() {
 
-      this.$store.commit('user/setFavoritePage')
+      this.$store.commit('fav/setFavoritePage')
 
       this.$store.commit('movies/saveSearchMovies', this.getMovies)
-      console.log(this.getSavedFromFavorites)
       this.$store.commit('movies/setMovies', this.favorites)
     },
     getUserData(name) {
-      console.log(name)
       this.showSignup = false
       this.showSignIn = false
       if (name) {
-        this.username = name
+        console.log(this.getUserName)
+        this.username = this.getUserName
         this.logged = true
       }
     },
     async logout() {
-      try {
-        const user = await appAuth.signOut()
+      this.$store.dispatch('user/logout')
+      if (!this.getError) {
         this.logged = false
-      } catch (err) {
-        console.log(err.message)
       }
+
     }
   },
   created() {
-    appAuth.onAuthStateChanged((user) => {
-      if (user) {
-        this.username = user.displayName
-        this.logged = true
-      } else {
-        this.logged = false
-      }
+    this.$store.dispatch('user/navBarLoad')
+    console.log("created", this.username)
+    if (this.getUserName) {
+      console.log("after created", this.getUserName)
+      this.username = this.getUserName
+      this.logged = true
+    } else {
+      this.logged = false
+    }
 
-    })
-  }
+  },
 
 }
-;
 </script>
 <style lang="scss" scoped>
 .fade-enter-active,

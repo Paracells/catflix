@@ -76,7 +76,6 @@
 <script>
 import {Form as VeeForm, Field, ErrorMessage} from "vee-validate";
 import {object, string} from 'yup'
-import {appAuth} from "../../config";
 
 export default {
   components: {VeeForm, Field, ErrorMessage},
@@ -90,21 +89,12 @@ export default {
 
     return {
       loginForm,
-      error: false,
-      errorText: ''
     }
   },
   methods: {
     async close(values) {
-      await appAuth.signInWithEmailAndPassword(values.email, values.password)
-          .then(() => {
-            console.log(appAuth.currentUser)
-            this.$emit("close", appAuth.currentUser.displayName);
-          })
-          .catch(err => {
-            this.error = true
-            this.errorText = err.message
-          })
+      this.$store.dispatch('user/loadUser', values)
+      this.$emit("close", this.$store.getters('user/getUser'));
 
     }
   }

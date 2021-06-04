@@ -28,7 +28,6 @@ const movies = {
             state.movies = state.movies.filter(el => el.id !== +id)
         },
         saveSearchMovies(state, payload) {
-            console.log('commit')
             state.savedFromFavorites = payload
         }
 

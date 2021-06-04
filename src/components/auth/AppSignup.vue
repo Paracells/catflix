@@ -50,7 +50,6 @@
                     name="email"
                     type="email"
                     autocomplete="email"
-                    required=""
                     class="input mb-4"
                     placeholder="Email address"
                 />
@@ -65,7 +64,6 @@
                     name="password"
                     type="password"
                     autocomplete="current-password"
-                    required=""
                     class="input"
                     placeholder="Password"
                 />
@@ -93,7 +91,6 @@
 import {Form as VeeForm, Field, ErrorMessage} from "vee-validate";
 import {object, string} from 'yup'
 import {markRaw} from 'vue'
-import {appAuth} from "../../config";
 
 export default {
   emits: ["close"],
@@ -113,16 +110,9 @@ export default {
     }
   },
   methods: {
-    async close(values) {
-      await appAuth.createUserWithEmailAndPassword(values.email, values.password)
-          .then((user) => {
-            appAuth.currentUser.updateProfile({displayName: values.name})
-            this.$emit("close", values.name);
-          })
-          .catch(err => {
-            this.error = true
-            this.errorText = err.message
-          })
+    close(values) {
+      this.$store.dispatch('user/saveUser', values)
+      this.$emit("close", values.name)
 
     },
   },

@@ -1,4 +1,4 @@
-const favorites = {
+const fav = {
     namespaced: true,
     state: {
         favorites: [],
@@ -25,8 +25,8 @@ const favorites = {
         resetFavoritePage(state) {
             state.favoritePage = false
         },
-        
+
     },
 };
 
-export default favorites;
+export default fav;

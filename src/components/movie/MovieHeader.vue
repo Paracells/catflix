@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     ...mapGetters("movie", {movie: "getCurrentMovie"}),
-    ...mapGetters("user", {favorites: "getFavorites", byId: "findById", page: 'getPageStatus'}),
+    ...mapGetters("fav", {favorites: "getFavorites", byId: "findById", page: 'getPageStatus'}),
 
     overView() {
       if (this.movie) {
@@ -94,12 +94,12 @@ export default {
   methods: {
     toggleFavorite() {
       if (this.favorite) {
-        this.$store.commit("user/removeFavorite", this.movie);
+        this.$store.commit("fav/removeFavorite", this.movie);
         if (this.page) {
           this.$store.commit('movies/removeById', this.movie.id)
         }
       } else {
-        this.$store.commit("user/addToFavorite", this.movie);
+        this.$store.commit("fav/addToFavorite", this.movie);
 
 
       }
