@@ -1,4 +1,3 @@
-import {BASE_URL, BASE_URL_SEARCH} from "../../utils";
 import axios from "../../api";
 
 const movie = {

@@ -40,17 +40,22 @@
       />
     </div>
 
-    <div>
-      <button @click="showModal = true" class="btn-header">Login</button>
+    <div v-if="!logged">
+      <button @click="showSignIn = true" class="btn-header">Login</button>
       <button @click="showSignup = true" class="btn-header hover:bg-blue-400">
         Signup
       </button>
       <transition name="fade">
-        <app-login v-if="showModal" @close="showModal = false"/>
+        <app-login v-if="showSignIn" @close="getUserData"/>
       </transition>
       <transition name="fade">
-        <app-signup v-if="showSignup" @close="showSignup = false"/>
+        <app-signup v-if="showSignup" @close="getUserData"/>
       </transition>
+    </div>
+    <div v-else>
+      <span class="mr-6">Hello, <span class="text-green-500">{{ username }}</span> </span>
+      <button class="btn-header" @click="logout">LOGOUT</button>
+
     </div>
   </header>
 </template>
@@ -59,15 +64,18 @@
 import AppLogin from "@/components/auth/AppLogin.vue";
 import AppSignup from "@/components/auth/AppSignup.vue";
 import {mapActions, mapGetters} from "vuex";
+import {appAuth} from "../../config";
 
 export default {
   components: {AppLogin, AppSignup},
   data() {
     return {
-      showModal: false,
+      showSignIn: false,
       showSignup: false,
       searchText: "",
-      favoritePage: false
+      favoritePage: false,
+      logged: false,
+      username: ''
     };
   },
   computed: {
@@ -111,8 +119,36 @@ export default {
       this.$store.commit('movies/saveSearchMovies', this.getMovies)
       console.log(this.getSavedFromFavorites)
       this.$store.commit('movies/setMovies', this.favorites)
+    },
+    getUserData(name) {
+      console.log(name)
+      this.showSignup = false
+      this.showSignIn = false
+      if (name) {
+        this.username = name
+        this.logged = true
+      }
+    },
+    async logout() {
+      try {
+        const user = await appAuth.signOut()
+        this.logged = false
+      } catch (err) {
+        console.log(err.message)
+      }
     }
   },
+  created() {
+    appAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.username = user.displayName
+        this.logged = true
+      } else {
+        this.logged = false
+      }
+
+    })
+  }
 
 }
 ;

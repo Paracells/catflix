@@ -77,8 +77,9 @@ export default {
   data() {
     return {
       favorite: false,
-      imageLink: "",
-    };
+      imageLink: '',
+
+    }
   },
   computed: {
     ...mapGetters("movie", {movie: "getCurrentMovie"}),
@@ -88,7 +89,7 @@ export default {
       if (this.movie) {
         return calcLength(this.movie.overview);
       }
-    },
+    }
   },
   methods: {
     toggleFavorite() {
@@ -99,16 +100,22 @@ export default {
         }
       } else {
         this.$store.commit("user/addToFavorite", this.movie);
+
+
       }
       this.favorite = !this.favorite;
-    },
-  },
+    }
+    ,
+  }
+  ,
   async created() {
     const result = getImage(this.movie, "backdrop_path");
     this.imageLink = result;
     this.favorite = this.byId(this.movie.id);
-  },
-};
+  }
+  ,
+}
+;
 </script>
 
 <style scoped>

@@ -26,60 +26,63 @@
             ></path>
           </svg>
         </div>
-        <Form class="mt-8 space-y-6" action="#" method="POST" @submit="close" :validation-schema="signUpForm">
-          <input type="hidden" name="remember" value="true"/>
-          <div class="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label for="name" class="sr-only">Name</label>
-              <Field
-                  id="name"
-                  name="name"
-                  type="text"
-                  class="input mb-4"
-                  placeholder="Name"
-              />
-              <div class="text-red-400 mb-4">
-                <error-message name="name"/>
+        <VeeForm v-slot="{handleSubmit}" :validation-schema="signUpForm">
+          <form class="mt-8 space-y-6" @submit="handleSubmit($event, close)">
+            <input type="hidden" name="remember" value="true"/>
+            <div class="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label for="name" class="sr-only">Name</label>
+                <Field
+                    id="name"
+                    name="name"
+                    type="text"
+                    class="input mb-4"
+                    placeholder="Name"
+                />
+                <div class="text-red-400 mb-4">
+                  <error-message name="name"/>
+                </div>
+              </div>
+              <div>
+                <label for="email-address" class="sr-only">Email address</label>
+                <Field
+                    id="email-address"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required=""
+                    class="input mb-4"
+                    placeholder="Email address"
+                />
+                <div class="text-red-400 mb-4">
+                  <error-message name="email"/>
+                </div>
+              </div>
+              <div>
+                <label for="password" class="sr-only">Password</label>
+                <Field
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    required=""
+                    class="input"
+                    placeholder="Password"
+                />
+                <div class="text-red-400 mt-4">
+                  <error-message name="password"/>
+                </div>
               </div>
             </div>
             <div>
-              <label for="email-address" class="sr-only">Email address</label>
-              <Field
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required=""
-                  class="input mb-4"
-                  placeholder="Email address"
-              />
-              <div class="text-red-400 mb-4">
-                <error-message name="email"/>
+              <button type="submit" class="btn btn-primary w-full bg-green-500 mt-6">
+                Sign up
+              </button>
+              <div v-if="error" class="text-red-500 mt-6">{{ errorText }}
               </div>
             </div>
-            <div>
-              <label for="password" class="sr-only">Password</label>
-              <Field
-                  id="password"
-                  name="password"
-                  type="password"
-                  autocomplete="current-password"
-                  required=""
-                  class="input"
-                  placeholder="Password"
-              />
-              <div class="text-red-400 mt-4">
-                <error-message name="password"/>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <button type="submit" class="btn btn-primary w-full bg-green-500 mt-6">
-              Sign up
-            </button>
-          </div>
-        </Form>
+          </form>
+        </VeeForm>
       </div>
     </div>
   </div>
@@ -87,13 +90,14 @@
 </template>
 
 <script>
-import {Form, Field, ErrorMessage} from "vee-validate";
+import {Form as VeeForm, Field, ErrorMessage} from "vee-validate";
 import {object, string} from 'yup'
 import {markRaw} from 'vue'
+import {appAuth} from "../../config";
 
 export default {
   emits: ["close"],
-  components: {Form, Field, ErrorMessage},
+  components: {VeeForm, Field, ErrorMessage},
   data() {
 
     const signUpForm = markRaw(object().shape({
@@ -103,12 +107,23 @@ export default {
     }))
 
     return {
-      signUpForm
+      signUpForm,
+      error: false,
+      errorText: ''
     }
   },
   methods: {
-    close(values) {
-      this.$emit("close");
+    async close(values) {
+      await appAuth.createUserWithEmailAndPassword(values.email, values.password)
+          .then((user) => {
+            appAuth.currentUser.updateProfile({displayName: values.name})
+            this.$emit("close", values.name);
+          })
+          .catch(err => {
+            this.error = true
+            this.errorText = err.message
+          })
+
     },
   },
 };

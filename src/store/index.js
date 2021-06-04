@@ -1,11 +1,11 @@
 import {createStore} from 'vuex'
 import movies from "./modules/movies";
 import movie from "./modules/movie";
-import user from "./modules/user";
+import favorites from "./modules/favorites";
 
 export default createStore({
 
-    modules: {movies, movie, user}
+    modules: {movies, movie, user: favorites}
 })
 
 

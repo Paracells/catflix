@@ -11,6 +11,7 @@
     "@heroicons/vue": "^1.0.1",
     "@tailwindcss/forms": "^0.3.2",
     "axios": "^0.21.1",
+    "firebase": "^8.6.4",
     "vee-validate": "^4.4.2",
     "vue": "^3.0.5",
     "vue-router": "^4.0.8",

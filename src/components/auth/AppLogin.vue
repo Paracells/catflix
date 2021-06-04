@@ -26,95 +26,88 @@
             ></path>
           </svg>
         </div>
-        <Form class="mt-8 space-y-6" action="#" method="POST" @submit="close" :validation-schema="loginForm">
-          <input type="hidden" name="remember" value="true"/>
-          <div class="rounded-md shadow-sm ">
-            <div>
-              <label for="email-address" class="sr-only">Email address</label>
-              <Field
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required=""
-                  class="input mb-4"
-                  placeholder="Email address"
-              />
-              <div class="text-red-400 mb-4">
-                <error-message name="email"/>
+        <VeeForm v-slot="{handleSubmit}" :validation-schema="loginForm">
+          <form class="mt-8 space-y-6" action="#" @submit="handleSubmit($event, close)">
+            <input type="hidden" name="remember" value="true"/>
+            <div class="rounded-md shadow-sm ">
+              <div>
+                <label for="email-address" class="sr-only">Email address</label>
+                <Field
+                    id="email-address"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    class="input mb-4"
+                    placeholder="Email address"
+                />
+                <div class="text-red-400 mb-4">
+                  <error-message name="email"/>
+                </div>
+              </div>
+              <div>
+                <label for="password" class="sr-only">Password</label>
+                <Field
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    class="input"
+                    placeholder="Password"
+                />
+                <div class="text-red-400 mt-4">
+                  <error-message name="password"/>
+                </div>
               </div>
             </div>
-
             <div>
-              <label for="password" class="sr-only">Password</label>
-              <Field
-                  id="password"
-                  name="password"
-                  type="password"
-                  autocomplete="current-password"
-                  required=""
-                  class="input"
-                  placeholder="Password"
-              />
-              <div class="text-red-400 mt-4">
-                <error-message name="password"/>
+              <button type="submit" class="btn btn-primary w-full mt-6">
+                Sign in
+              </button>
+              <div v-if="error" class="text-red-500 mt-6">{{ errorText }}
               </div>
             </div>
-
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <input
-                  id="remember_me"
-                  name="remember_me"
-                  type="checkbox"
-                  v-model="checked"
-                  class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label for="remember_me" class="ml-2 block text-sm text-gray-300">
-                Remember me
-              </label>
-            </div>
-
-
-          </div>
-
-          <div>
-            <button type="submit" class="btn btn-primary w-full">
-              Sign in
-            </button>
-          </div>
-        </Form>
+          </form>
+        </VeeForm>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {Form, Field, ErrorMessage} from "vee-validate";
+import {Form as VeeForm, Field, ErrorMessage} from "vee-validate";
 import {object, string} from 'yup'
+import {appAuth} from "../../config";
 
 export default {
-  components: {Form, Field, ErrorMessage},
+  components: {VeeForm, Field, ErrorMessage},
   emits: ["close"],
   data() {
 
-
     const loginForm = object({
       email: string().required().email(),
-      password: string().required().min(8)
+      password: string().required().min(6)
     })
 
     return {
       loginForm,
-      checked: true
+      error: false,
+      errorText: ''
     }
   },
   methods: {
-    close(values) {
-      this.$emit("close");
-    },
-  },
-};
+    async close(values) {
+      await appAuth.signInWithEmailAndPassword(values.email, values.password)
+          .then(() => {
+            console.log(appAuth.currentUser)
+            this.$emit("close", appAuth.currentUser.displayName);
+          })
+          .catch(err => {
+            this.error = true
+            this.errorText = err.message
+          })
+
+    }
+  }
+}
+
 </script>
