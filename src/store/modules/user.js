@@ -7,7 +7,6 @@ const user = {
         error: {}
     },
     getters: {
-        getUser: (state) => state.userData,
         getError: (state) => state.error,
         getUserName: (state) => state.userData.displayName
 
@@ -21,10 +20,11 @@ const user = {
         }
     },
     actions: {
-        async saveUser({commit}, values) {
-            await appAuth.createUserWithEmailAndPassword(values.email, values.password)
+        saveUser({commit}, values) {
+            appAuth.createUserWithEmailAndPassword(values.email, values.password)
                 .then((u) => {
                     u.user.updateProfile({displayName: values.name})
+                    commit('setUserData', u.user)
                     commit('setError', {status: false, text: ''})
                 })
                 .catch(err => {
@@ -32,8 +32,8 @@ const user = {
 
                 })
         },
-        async loadUser({commit}, values) {
-            await appAuth.signInWithEmailAndPassword(values.email, values.password)
+        loadUser({commit}, values) {
+            appAuth.signInWithEmailAndPassword(values.email, values.password)
                 .then((u) => {
                     commit('setUserData', u.user)
                     commit('setError', {status: false, text: ''})
@@ -44,17 +44,10 @@ const user = {
                 })
 
         },
-        async logout() {
-            await appAuth.signOut().then(() => this.error = false).catch((err) => console.log(err.message))
+        logout() {
+            appAuth.signOut().then(() => this.error = false).catch((err) => console.log(err.message))
         },
-        async navBarLoad({commit}) {
-            await appAuth.onAuthStateChanged((user) => {
-                if (user) {
-                    commit('setUserData', user)
-                    commit('setError', {status: false, text: ''})
-                }
-            })
-        }
+        
 
     }
 }

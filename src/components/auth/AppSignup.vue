@@ -114,8 +114,8 @@ export default {
   methods: {
     async close(values) {
       await this.$store.dispatch('user/saveUser', values)
-      if (this.error.status) {
-      } else {
+      if (!this.error.status) {
+        console.log(values)
         this.$emit("close", values.name)
       }
 

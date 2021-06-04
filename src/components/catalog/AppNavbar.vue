@@ -80,7 +80,7 @@ export default {
   computed: {
     ...mapGetters("movies", ["getMovies", "getFilter", 'getSavedFromFavorites']),
     ...mapGetters("fav", {favorites: "getFavorites", status: "getPageStatus"}),
-    ...mapGetters('user', ['getUser', 'getError', 'getErrorText', 'getUserName'])
+    ...mapGetters('user', ['getError', 'getUserName'])
   },
   methods: {
     ...mapActions("movies", ["searchFilms", "getFilms"]),
@@ -127,22 +127,20 @@ export default {
         this.logged = true
       }
     },
-    async logout() {
-      await this.$store.dispatch('user/logout')
+    logout() {
+      this.$store.dispatch('user/logout')
       if (!this.getError.status) {
         this.logged = false
       }
 
     }
   },
-  async created() {
-    await this.$store.dispatch('user/navBarLoad')
-    console.log("created", this.getUserName)
+  created() {
+    this.$store.dispatch('navBarLoad')
+    console.log('this.getUserName', this.getUserName)
     if (this.getUserName) {
       this.username = this.getUserName
       this.logged = true
-    } else {
-      this.logged = false
     }
 
   },

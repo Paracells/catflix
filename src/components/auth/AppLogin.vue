@@ -93,13 +93,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['getUser', 'getError'])
+    ...mapGetters('user', ['getError', 'getUserName'])
   },
   methods: {
     async close(values) {
       await this.$store.dispatch('user/loadUser', values)
       if (!this.getError.status) {
-        this.$emit("close", this.getUser);
+        this.$emit("close", this.getUserName);
       }
 
     }
