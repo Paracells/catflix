@@ -123,24 +123,22 @@ export default {
       this.showSignup = false
       this.showSignIn = false
       if (name) {
-        console.log(this.getUserName)
         this.username = this.getUserName
         this.logged = true
       }
     },
     async logout() {
-      this.$store.dispatch('user/logout')
-      if (!this.getError) {
+      await this.$store.dispatch('user/logout')
+      if (!this.getError.status) {
         this.logged = false
       }
 
     }
   },
-  created() {
-    this.$store.dispatch('user/navBarLoad')
-    console.log("created", this.username)
+  async created() {
+    await this.$store.dispatch('user/navBarLoad')
+    console.log("created", this.getUserName)
     if (this.getUserName) {
-      console.log("after created", this.getUserName)
       this.username = this.getUserName
       this.logged = true
     } else {

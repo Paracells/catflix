@@ -63,7 +63,7 @@
               <button type="submit" class="btn btn-primary w-full mt-6">
                 Sign in
               </button>
-              <div v-if="error" class="text-red-500 mt-6">{{ errorText }}
+              <div v-if="getError.status" class="text-red-500 mt-6">{{ getError.text }}
               </div>
             </div>
           </form>
@@ -76,6 +76,7 @@
 <script>
 import {Form as VeeForm, Field, ErrorMessage} from "vee-validate";
 import {object, string} from 'yup'
+import {mapGetters} from 'vuex'
 
 export default {
   components: {VeeForm, Field, ErrorMessage},
@@ -91,10 +92,15 @@ export default {
       loginForm,
     }
   },
+  computed: {
+    ...mapGetters('user', ['getUser', 'getError'])
+  },
   methods: {
     async close(values) {
-      this.$store.dispatch('user/loadUser', values)
-      this.$emit("close", this.$store.getters('user/getUser'));
+      await this.$store.dispatch('user/loadUser', values)
+      if (!this.getError.status) {
+        this.$emit("close", this.getUser);
+      }
 
     }
   }

@@ -76,7 +76,7 @@
               <button type="submit" class="btn btn-primary w-full bg-green-500 mt-6">
                 Sign up
               </button>
-              <div v-if="error" class="text-red-500 mt-6">{{ errorText }}
+              <div v-if="error.status" class="text-red-500 mt-6">{{ error.text }}
               </div>
             </div>
           </form>
@@ -91,6 +91,7 @@
 import {Form as VeeForm, Field, ErrorMessage} from "vee-validate";
 import {object, string} from 'yup'
 import {markRaw} from 'vue'
+import {mapGetters} from 'vuex'
 
 export default {
   emits: ["close"],
@@ -105,14 +106,18 @@ export default {
 
     return {
       signUpForm,
-      error: false,
-      errorText: ''
     }
   },
+  computed: {
+    ...mapGetters('user', {error: 'getError'})
+  },
   methods: {
-    close(values) {
-      this.$store.dispatch('user/saveUser', values)
-      this.$emit("close", values.name)
+    async close(values) {
+      await this.$store.dispatch('user/saveUser', values)
+      if (this.error.status) {
+      } else {
+        this.$emit("close", values.name)
+      }
 
     },
   },

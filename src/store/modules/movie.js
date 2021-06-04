@@ -20,7 +20,6 @@ const movie = {
                 director: state.crew.filter(el => el.known_for_department === 'Directing').map(el => el.name).join(', '),
                 writing: state.crew.filter(el => el.known_for_department === 'Writing').map(el => el.name).join(', ')
 
-
             }
         },
         getKeywords: (state) => {
@@ -36,7 +35,6 @@ const movie = {
             state.credits = payload
         },
         setCrew(state, payload) {
-            // state.crew = payload.length === 0 ? ['no data'] : payload
             state.crew = payload
         },
         setKeywords(state, payload) {

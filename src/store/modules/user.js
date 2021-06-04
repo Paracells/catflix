@@ -4,56 +4,54 @@ const user = {
     namespaced: true,
     state: {
         userData: '',
-        error: '',
-        errorText: ''
+        error: {}
     },
     getters: {
         getUser: (state) => state.userData,
         getError: (state) => state.error,
-        getErrorText: (state) => state.errorText,
-        getUserName: (state) => state.userData.dispalyName
+        getUserName: (state) => state.userData.displayName
 
+    },
+    mutations: {
+        setError(state, payload) {
+            state.error = {status: payload.status, text: payload.text}
+        },
+        setUserData(state, payload) {
+            state.userData = payload
+        }
     },
     actions: {
         async saveUser({commit}, values) {
             await appAuth.createUserWithEmailAndPassword(values.email, values.password)
                 .then((u) => {
                     u.user.updateProfile({displayName: values.name})
-                    this.error = false
-                    this.errorText = ''
+                    commit('setError', {status: false, text: ''})
                 })
                 .catch(err => {
-                    this.error = true
-                    this.errorText = err.message
+                    commit('setError', {status: true, text: err.message})
+
                 })
         },
         async loadUser({commit}, values) {
             await appAuth.signInWithEmailAndPassword(values.email, values.password)
                 .then((u) => {
-                    this.userData = u.user
-                    console.log("u.user", u.user)
-                    this.error = false
-                    this.errorText = ''
+                    commit('setUserData', u.user)
+                    commit('setError', {status: false, text: ''})
+
                 })
                 .catch(err => {
-                    this.error = true
-                    this.errorText = err.message
+                    commit('setError', {status: true, text: err.message})
                 })
 
         },
         async logout() {
             await appAuth.signOut().then(() => this.error = false).catch((err) => console.log(err.message))
         },
-        navBarLoad() {
-            const vm = this
-            appAuth.onAuthStateChanged(function (user) {
+        async navBarLoad({commit}) {
+            await appAuth.onAuthStateChanged((user) => {
                 if (user) {
-                    console.log("navBarLoad", user)
-                    this.userData = user
-                    this.error = false
-                } else {
-                    this.error = "true"
-                    this.errorText = "Unknown error"
+                    commit('setUserData', user)
+                    commit('setError', {status: false, text: ''})
                 }
             })
         }
