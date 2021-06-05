@@ -1,4 +1,4 @@
-import axios from "../../api";
+import {movieAxios} from "../../api";
 
 const movie = {
     namespaced: true,
@@ -44,7 +44,7 @@ const movie = {
     actions: {
 
         async getFilm({commit}, id) {
-            const result = await axios.get(`${id}?api_key=${
+            const result = await movieAxios.get(`${id}?api_key=${
                 import.meta.env.VITE_APP_MOVIE_API_KEY
             }&language=en-US`).catch(() => null)
             if (result) {
@@ -53,14 +53,14 @@ const movie = {
         },
 
         async getCredits({commit}, id) {
-            const result = await axios.get(`${id}/credits?api_key=${
+            const result = await movieAxios.get(`${id}/credits?api_key=${
                 import.meta.env.VITE_APP_MOVIE_API_KEY
             }&language=en-US`)
             commit("setCrew", result.data.crew);
             commit("setCredits", result.data.cast.splice(0, 5));
         },
         async getKeywords({commit}, id) {
-            const result = await axios.get(`${id}/keywords?api_key=${
+            const result = await movieAxios.get(`${id}/keywords?api_key=${
                 import.meta.env.VITE_APP_MOVIE_API_KEY
             }&language=en-US`)
             commit("setKeywords", result.data.keywords);

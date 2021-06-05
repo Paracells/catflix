@@ -1,4 +1,4 @@
-import {BASE_URL, BASE_URL_SEARCH} from "../../utils";
+import {movieAxios, searchAxios} from "../../api";
 
 const movies = {
     namespaced: true,
@@ -34,23 +34,23 @@ const movies = {
     },
     actions: {
         async getFilms({commit}, filter) {
-            const result = await fetch(
-                `${BASE_URL}${filter}?api_key=${
+            const result = await movieAxios.get(
+                `${filter}?api_key=${
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }`
-            ).then((data) => data.json());
-            commit("setMovies", result.results);
+            );
+            commit("setMovies", result.data.results);
         },
 
 
         // search films
         async searchFilms({commit}, searchString) {
-            const result = await fetch(
-                `${BASE_URL_SEARCH}search/movie?api_key=${
+            const result = await searchAxios.get(
+                `search/movie?api_key=${
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }&language=en-US&query=${searchString}&page=1&include_adult=false`
-            ).then((data) => data.json());
-            commit("setMovies", result.results);
+            );
+            commit("setMovies", result.data.results);
         },
 
     },
