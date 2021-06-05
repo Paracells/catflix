@@ -15,6 +15,7 @@ const routes = [
         component: () => import("../components/catalog/AppCatalog.vue"),
 
     },
+   
     {
         // карточка-компонент отдельного фильма
         path: "/movies/:id",

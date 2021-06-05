@@ -120,7 +120,7 @@ export default {
         }
         this.favorite = !this.favorite;
       } else {
-        this.setNotification('You must be logged', WARNING)
+        this.setNotification('You must be logged in', WARNING)
       }
     },
     setNotification(message, color) {

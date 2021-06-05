@@ -5,21 +5,24 @@
     <nav class="justify-self-start">
       <ul class="list-reset flex items-center">
         <li class="mr-4">
-          <a
+          <router-link
               @click="backToNowPlaying"
-              class="text-white block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
-              href="#"
+              class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
+              :class="{'text-yellow-500':homeActive}"
+              :to="{name:'AppCatalog'}"
           >
             Home
-          </a>
+          </router-link>
         </li>
         <li class="mr-1">
-          <a @click="gotoFavorites"
-             class="text-white border-t block no-underline py-2 text-grey-darkest hover:text-indigo-500 md:border-none md:p-0"
-             href="#"
+          <router-link @click="gotoFavorites"
+                       class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
+                       :class="{'text-yellow-500':!homeActive}"
+                       :to="{name:'AppCatalog'}"
+
           >
             My Favorites
-          </a>
+          </router-link>
         </li>
         <li
             class="bg-red-500 h-5 w-5 mb-4 text-white text-center flex items-center justify-center rounded-full"
@@ -29,7 +32,6 @@
       </ul>
     </nav>
 
-    <!-- Search field -->
     <div class="mb-4 md:mb-0 justify-self-center">
       <input
           class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full  bg-gray-700 placeholder-white text-white"
@@ -58,6 +60,7 @@ export default {
     return {
       searchText: "",
       favoritePage: false,
+      homeActive: true
 
     };
   },
@@ -79,6 +82,7 @@ export default {
       }
     },
     backToNowPlaying() {
+      this.homeActive = true
       if (this.status) {
         this.$store.commit('fav/resetFavoritePage')
         if (this.getSavedFromFavorites.length === 0) {
@@ -96,7 +100,7 @@ export default {
       this.getFilms(this.getFilter ? this.getFilter : filter);
     },
     gotoFavorites() {
-
+      this.homeActive = false
       this.$store.commit('fav/setFavoritePage')
 
       this.$store.commit('movies/saveSearchMovies', this.getMovies)
