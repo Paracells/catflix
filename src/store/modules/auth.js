@@ -44,7 +44,7 @@ const user = {
 
         async loadUser({commit, dispatch}, payload) {
             const result = await dispatch("checkIfExists", payload.email)
-            if (result) {
+            if (result.password === payload.password) {
                 commit('setUserData', {name: result.name, email: payload.email})
                 commit('setError', {status: false, text: ''})
             } else {
@@ -57,9 +57,7 @@ const user = {
         async navBarLoad({commit, dispatch}) {
             const data = localStorage.getItem('user')
             const user = data ? JSON.parse(data) : false
-            console.log("navBarLoad user", user)
             const dbQuery = await dispatch('checkIfExists', user.email)
-            console.log('dbQuery', dbQuery)
             if (dbQuery) {
                 commit('setUserData', user)
                 commit('setError', {status: false, text: ''})
@@ -69,9 +67,8 @@ const user = {
         },
 
         async checkIfExists({commit}, payload) {
-            const b = await db.collection(database).doc(payload).get().then(doc => doc.exists ? doc.data() : false)
-            console.log(b)
-            return b
+            return await db.collection(database).doc(payload).get().then(doc => doc.exists ? doc.data() : false)
+
         },
 
         async logout({commit}) {

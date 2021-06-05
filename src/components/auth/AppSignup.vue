@@ -117,13 +117,13 @@ export default {
       if (!this.error.status) {
         this.$emit("close", values.name)
       }
+    },
+    exitForm() {
+      this.$store.commit('auth/setError', {status: false, text: false})
+      this.$emit('close')
     }
-
   },
-  /*exitForm() {
-    this.$store.commit('user/setError', {status: false, text: false})
-    this.$emit('close')
-  }*/
+
 
 };
 </script>

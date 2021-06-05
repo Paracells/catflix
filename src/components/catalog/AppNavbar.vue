@@ -1,5 +1,5 @@
 <template>
-  <header
+  <div
       class="border-b md:flex md:items-center md:justify-between p-4 pb-0 md:pb-4 bg-gray-700 bg-opacity-80"
   >
     <nav>
@@ -39,48 +39,26 @@
           @keyup.enter="loadFilms"
       />
     </div>
-
-    <div v-if="!logged">
-      <button @click="showSignIn = true" class="btn-header">Login</button>
-      <button @click="showSignup = true" class="btn-header hover:bg-blue-400">
-        Signup
-      </button>
-      <transition name="fade">
-        <app-login v-if="showSignIn" @close="getUserData"/>
-      </transition>
-      <transition name="fade">
-        <app-signup v-if="showSignup" @close="getUserData"/>
-      </transition>
-    </div>
-    <div v-else>
-      <span class="mr-6">Hello, <span class="text-green-500">{{ username }}</span> </span>
-      <button class="btn-header" @click="logout">LOGOUT</button>
-
-    </div>
-  </header>
+    <app-auth/>
+  </div>
 </template>
 
 <script>
-import AppLogin from "@/components/auth/AppLogin.vue";
-import AppSignup from "@/components/auth/AppSignup.vue";
+
 import {mapActions, mapGetters} from "vuex";
+import AppAuth from "../auth/AppAuth.vue";
 
 export default {
-  components: {AppLogin, AppSignup},
+  components: {AppAuth},
   data() {
     return {
-      showSignIn: false,
-      showSignup: false,
       searchText: "",
       favoritePage: false,
-      logged: false,
-      username: ''
     };
   },
   computed: {
     ...mapGetters("movies", ["getMovies", "getFilter", 'getSavedFromFavorites']),
     ...mapGetters("fav", {favorites: "getFavorites", status: "getPageStatus"}),
-    ...mapGetters('auth', ['getError', 'getUserName'])
   },
   methods: {
     ...mapActions("movies", ["searchFilms", "getFilms"]),
@@ -119,32 +97,9 @@ export default {
       this.$store.commit('movies/saveSearchMovies', this.getMovies)
       this.$store.commit('movies/setMovies', this.favorites)
     },
-    getUserData(name) {
-      this.showSignup = false
-      this.showSignIn = false
-      if (name) {
-        this.username = name
-        this.logged = true
-      }
-    },
-    async logout() {
-      await this.$store.dispatch('auth/logout')
-      if (!this.getError.status) {
-        this.logged = false
-      }
 
-    }
   },
-  async created() {
-    await this.$store.dispatch('auth/navBarLoad')
-    console.log("this.getUserName", this.getUserName)
-    if (this.getUserName) {
-      this.username = this.getUserName
-      this.logged = true
-    } else {
-      this.logged = false
-    }
-  }
+
 }
 </script>
 <style lang="scss" scoped>
