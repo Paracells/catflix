@@ -1,4 +1,5 @@
 <template>
+
   <div
       class="border-b grid grid-cols-3 justify-items-center p-4  md:pb-4 bg-gray-700 bg-opacity-80"
   >
@@ -11,24 +12,26 @@
               :class="{'text-yellow-500':homeActive}"
               :to="{name:'AppCatalog'}"
           >
-            Home
+            Catalog
           </router-link>
         </li>
-        <li class="mr-1">
-          <router-link @click="gotoFavorites"
-                       class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
-                       :class="{'text-yellow-500':!homeActive}"
-                       :to="{name:'AppCatalog'}"
+        <template v-if="logInApp">
+          <li class="mr-1">
+            <router-link @click="gotoFavorites"
+                         class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
+                         :class="{'text-yellow-500':!homeActive}"
+                         :to="{name:'AppCatalog'}"
 
+            >
+              My Favorites
+            </router-link>
+          </li>
+          <li
+              class="bg-red-500 h-5 w-5 mb-4 text-white text-center flex items-center justify-center rounded-full"
           >
-            My Favorites
-          </router-link>
-        </li>
-        <li
-            class="bg-red-500 h-5 w-5 mb-4 text-white text-center flex items-center justify-center rounded-full"
-        >
-          {{ favorites.length }}
-        </li>
+            {{ favorites.length }}
+          </li>
+        </template>
       </ul>
     </nav>
 
@@ -43,7 +46,7 @@
       />
     </div>
     <transition name="fade">
-      <app-auth class="justify-self-end"/>
+      <app-auth class="justify-self-end" @loggedStatus="logged"/>
     </transition>
   </div>
 </template>
@@ -52,15 +55,18 @@
 
 import {mapActions, mapGetters} from "vuex";
 import AppAuth from "../auth/AppAuth.vue";
-import Notification from "../AppNotification.vue";
+import AppNotification from "../AppNotification.vue";
+import {WARNING} from "../../utils/color";
 
 export default {
-  components: {Notification, AppAuth},
+  components: {AppNotification, AppAuth},
   data() {
     return {
       searchText: "",
       favoritePage: false,
-      homeActive: true
+      homeActive: true,
+      logInApp: false,
+      WARNING
 
     };
   },
@@ -70,9 +76,13 @@ export default {
   },
   methods: {
     ...mapActions("movies", ["searchFilms", "getFilms"]),
+    logged(value) {
+      this.logInApp = value
+    },
 
     async loadFilms() {
       if (this.searchText) {
+        this.homeActive = true
         this.$store.commit("movies/setFilter", "");
         await this.searchFilms(this.searchText);
         this.searchText = ''
@@ -105,6 +115,9 @@ export default {
 
       this.$store.commit('movies/saveSearchMovies', this.getMovies)
       this.$store.commit('movies/setMovies', this.favorites)
+      if (this.$store.getters['auth/getUser']) {
+
+      }
     },
 
   },

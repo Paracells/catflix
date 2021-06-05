@@ -35,7 +35,8 @@ export default {
       showSignup: false,
       logged: false,
       username: '',
-      loading: false
+      loading: false,
+      loggedStatus: false
     }
   },
   computed: {
@@ -68,7 +69,12 @@ export default {
       this.logged = false
     }
     this.loading = false
+  },
+
+  updated() {
+    this.$emit('loggedStatus', this.logged)
   }
+
 }
 </script>
 

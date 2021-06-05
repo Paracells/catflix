@@ -25,7 +25,7 @@ export default {
   },
 
   mounted() {
-    timer = setTimeout(() => this.$emit('closeNotification'), 800)
+    timer = setTimeout(() => this.$emit('closeNotification'), 1000)
   },
   beforeUnmount() {
     clearTimeout(timer)

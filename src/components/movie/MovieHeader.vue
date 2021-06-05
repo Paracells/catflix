@@ -120,7 +120,7 @@ export default {
         }
         this.favorite = !this.favorite;
       } else {
-        this.setNotification('You must be logged in', WARNING)
+        this.setNotification('Sorry. You must be logged in to use this feature.', WARNING)
       }
     },
     setNotification(message, color) {
