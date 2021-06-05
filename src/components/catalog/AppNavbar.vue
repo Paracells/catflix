@@ -50,13 +50,15 @@
 
 import {mapActions, mapGetters} from "vuex";
 import AppAuth from "../auth/AppAuth.vue";
+import Notification from "../AppNotification.vue";
 
 export default {
-  components: {AppAuth},
+  components: {Notification, AppAuth},
   data() {
     return {
       searchText: "",
       favoritePage: false,
+
     };
   },
   computed: {

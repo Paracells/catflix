@@ -1,9 +1,10 @@
 <template>
   <div class="h-full w-full relative">
+
     <div>
       <svg
           @click="$router.back()"
-          class="h-16 w-16 text-gray-100 cursor-pointer bg-indigo-500 bg-opacity-90 rounded-full absolute top-6 left-6 hover:ring-yellow-500 ring-4"
+          class="h-16 w-16 text-gray-100 cursor-pointer bg-indigo-500 bg-opacity-90 rounded-full z-0 absolute top-6 left-6 hover:ring-yellow-500 ring-4"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -16,6 +17,10 @@
         <line x1="16" y1="12" x2="8" y2="12"/>
       </svg>
     </div>
+    <transition name="fade" mode="out-in">
+      <app-notification v-if="showNotify" :message="message" :color="color" @closeNotification="showNotify=false"/>
+    </transition>
+
     <img class="object-cover h-80 w-full" loading="lazy" :src="imageLink"/>
     <div
         class="font-headline tracking-wider absolute bottom-40 left-5 text-7xl font-extrabold text-yellow-400"
@@ -65,19 +70,26 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
 import {calcLength, getImage} from "../../utils";
 import {mapGetters} from "vuex";
+import AppNotification from "../AppNotification.vue";
 
 export default {
   name: "MovieHeader",
+  components: {AppNotification},
   data() {
     return {
       favorite: false,
       imageLink: '',
+      message: 'sadfasdf',
+      color: 'bg-green-500',
+      showNotify: false,
+      anim: 'fade'
 
     }
   },
@@ -94,18 +106,23 @@ export default {
   methods: {
     toggleFavorite() {
       if (this.favorite) {
+        this.setNotification("Removed from favorites", 'bg-red-500', 'off')
         this.$store.commit("fav/removeFavorite", this.movie);
         if (this.page) {
           this.$store.commit('movies/removeById', this.movie.id)
         }
       } else {
+        this.setNotification("Added to favorites", 'bg-green-500', 'fade')
         this.$store.commit("fav/addToFavorite", this.movie);
-
-
       }
       this.favorite = !this.favorite;
+    },
+    setNotification(message, color, animName) {
+      this.message = message
+      this.color = color
+      this.showNotify = true
+
     }
-    ,
   }
   ,
   async created() {
@@ -119,4 +136,14 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 </style>
