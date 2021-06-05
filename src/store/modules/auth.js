@@ -7,10 +7,12 @@ const user = {
     state: {
         userData: '',
         error: {},
+        logged: ''
     },
     getters: {
         getError: (state) => state.error,
-        getUserName: (state) => state.userData.name
+        getUserName: (state) => state.userData.name,
+        getUser: () => localStorage.getItem('user')
 
     },
     mutations: {
@@ -61,8 +63,6 @@ const user = {
             if (dbQuery) {
                 commit('setUserData', user)
                 commit('setError', {status: false, text: ''})
-            } else {
-                commit('setUserData', {})
             }
         },
 

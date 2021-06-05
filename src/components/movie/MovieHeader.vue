@@ -78,6 +78,7 @@
 import {calcLength, getImage} from "../../utils";
 import {mapGetters} from "vuex";
 import AppNotification from "../AppNotification.vue";
+import {ALERT, WARNING, SUCCESS} from "../../utils/color";
 
 export default {
   name: "MovieHeader",
@@ -105,19 +106,24 @@ export default {
   },
   methods: {
     toggleFavorite() {
-      if (this.favorite) {
-        this.setNotification("Removed from favorites", 'bg-red-500', 'off')
-        this.$store.commit("fav/removeFavorite", this.movie);
-        if (this.page) {
-          this.$store.commit('movies/removeById', this.movie.id)
+      console.log(this.$store.getters['auth/getUser'])
+      if (this.$store.getters['auth/getUser']) {
+        if (this.favorite) {
+          this.setNotification("Removed from favorites", ALERT, 'off')
+          this.$store.commit("fav/removeFavorite", this.movie);
+          if (this.page) {
+            this.$store.commit('movies/removeById', this.movie.id)
+          }
+        } else {
+          this.setNotification("Added to favorites", SUCCESS, 'fade')
+          this.$store.commit("fav/addToFavorite", this.movie);
         }
+        this.favorite = !this.favorite;
       } else {
-        this.setNotification("Added to favorites", 'bg-green-500', 'fade')
-        this.$store.commit("fav/addToFavorite", this.movie);
+        this.setNotification('You must be logged', WARNING)
       }
-      this.favorite = !this.favorite;
     },
-    setNotification(message, color, animName) {
+    setNotification(message, color) {
       this.message = message
       this.color = color
       this.showNotify = true
