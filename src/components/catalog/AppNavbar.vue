@@ -64,7 +64,6 @@
 import AppLogin from "@/components/auth/AppLogin.vue";
 import AppSignup from "@/components/auth/AppSignup.vue";
 import {mapActions, mapGetters} from "vuex";
-import {appAuth} from "../../config";
 
 export default {
   components: {AppLogin, AppSignup},
@@ -81,7 +80,7 @@ export default {
   computed: {
     ...mapGetters("movies", ["getMovies", "getFilter", 'getSavedFromFavorites']),
     ...mapGetters("fav", {favorites: "getFavorites", status: "getPageStatus"}),
-    ...mapGetters('user', ['getError', 'getUserName'])
+    ...mapGetters('auth', ['getError', 'getUserName'])
   },
   methods: {
     ...mapActions("movies", ["searchFilms", "getFilms"]),
@@ -129,7 +128,7 @@ export default {
       }
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('auth/logout')
       if (!this.getError.status) {
         this.logged = false
       }
@@ -137,7 +136,8 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch('user/navBarLoad')
+    await this.$store.dispatch('auth/navBarLoad')
+    console.log("this.getUserName", this.getUserName)
     if (this.getUserName) {
       this.username = this.getUserName
       this.logged = true

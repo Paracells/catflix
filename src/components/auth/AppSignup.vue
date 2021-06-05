@@ -109,22 +109,21 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', {error: 'getError'})
+    ...mapGetters('auth', {error: 'getError'})
   },
   methods: {
     async close(values) {
-      await this.$store.dispatch('user/saveUser', values)
-      console.log(this.error.status)
+      await this.$store.dispatch('auth/saveUser', values)
       if (!this.error.status) {
-        console.log(values)
         this.$emit("close", values.name)
       }
-
-    },
-    exitForm() {
-      this.$store.commit('user/setError', {status: false, text: false})
-      this.$emit('close')
     }
+
   },
+  /*exitForm() {
+    this.$store.commit('user/setError', {status: false, text: false})
+    this.$emit('close')
+  }*/
+
 };
 </script>

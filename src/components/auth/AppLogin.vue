@@ -93,20 +93,20 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['getError', 'getUserName'])
+    ...mapGetters('auth', ['getError', 'getUserName'])
   },
   methods: {
-    async close(values) {
-      await this.$store.dispatch('user/loadUser', values)
-      if (!this.getError.status) {
 
+    async close(values) {
+      await this.$store.dispatch('auth/loadUser', values)
+      if (!this.getError.status) {
 
         this.$emit("close", this.getUserName);
       }
 
     },
     exitForm() {
-      this.$store.commit('user/setError', {status: false, text: false})
+      this.$store.commit('auth/setError', {status: false, text: false})
       this.$emit('close')
     }
   }
