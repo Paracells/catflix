@@ -1,8 +1,8 @@
 <template>
   <div
-      class="border-b md:flex md:items-center md:justify-between p-4 pb-0 md:pb-4 bg-gray-700 bg-opacity-80"
+      class="border-b grid grid-cols-3 justify-items-center p-4  md:pb-4 bg-gray-700 bg-opacity-80"
   >
-    <nav>
+    <nav class="justify-self-start">
       <ul class="list-reset flex items-center">
         <li class="mr-4">
           <a
@@ -30,16 +30,19 @@
     </nav>
 
     <!-- Search field -->
-    <div class="mb-4 w-full md:mb-0 md:w-1/4">
+    <div class="mb-4 md:mb-0 justify-self-center">
       <input
-          class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white"
+          class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full  bg-gray-700 placeholder-white text-white"
           placeholder="Search a movie..."
           type="text"
+          size="50"
           v-model="searchText"
           @keyup.enter="loadFilms"
       />
     </div>
-    <app-auth/>
+    <transition name="fade">
+      <app-auth class="justify-self-end"/>
+    </transition>
   </div>
 </template>
 
