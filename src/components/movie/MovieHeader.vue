@@ -110,13 +110,13 @@ export default {
       if (this.$store.getters['auth/getUser']) {
         if (this.favorite) {
           this.setNotification("Removed from favorites", ALERT, 'off')
-          this.$store.commit("fav/removeFavorite", this.movie);
+          this.$store.dispatch("fav/removeFavorite", this.movie);
           if (this.page) {
             this.$store.commit('movies/removeById', this.movie.id)
           }
         } else {
           this.setNotification("Added to favorites", SUCCESS, 'fade')
-          this.$store.commit("fav/addToFavorite", this.movie);
+          this.$store.dispatch("fav/addToFavorite", this.movie);
         }
         this.favorite = !this.favorite;
       } else {

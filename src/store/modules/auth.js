@@ -1,6 +1,5 @@
 import {db} from "../../config";
-
-const database = 'USERS'
+import {database} from "../../utils";
 
 const user = {
     namespaced: true,
@@ -12,7 +11,7 @@ const user = {
     getters: {
         getError: (state) => state.error,
         getUserName: (state) => state.userData.name,
-        getUser: () => localStorage.getItem('user')
+        getUser: () => JSON.parse(localStorage.getItem('user'))
 
     },
     mutations: {

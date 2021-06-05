@@ -1,5 +1,8 @@
 import noPhoto from "../assets/no-photo.jpg";
 
+// database name in firebase
+export const database = 'USERS'
+
 /**
  *
  * splice line more than 30 words

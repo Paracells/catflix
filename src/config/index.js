@@ -12,8 +12,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-
-//get access to authentication in firebase
 const db = firebase.firestore();
 
 export {db}
