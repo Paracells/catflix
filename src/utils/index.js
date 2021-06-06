@@ -40,3 +40,16 @@ export function getImage(id, key) {
 export function convertDate(date) {
     return new Date(date).toLocaleDateString()
 }
+
+/**
+ * calc number of years between two dates
+ * @param date
+ * @returns {number}
+ */
+
+export function birthDate(date) {
+    const currentTime = new Date().getTime();
+    const birthDateTime = new Date(date).getTime();
+    const difference = (currentTime - birthDateTime)
+    return Math.round(difference / (1000 * 60 * 60 * 24 * 365))
+}

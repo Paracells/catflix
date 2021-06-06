@@ -14,7 +14,9 @@
         <div class="row-start-2">Gender:</div>
         <div class="row-start-2">{{ sex(person.gender) }}</div>
         <div class="row-start-3">Birthday:</div>
-        <div class="row-start-3">{{ convertDate(person.birthday) }}</div>
+        <div class="row-start-3 col-span-2">{{ convertDate(person.birthday) }} &nbsp ({{ birthDate(person.birthday) }}
+          years)
+        </div>
         <div class="row-start-4">IMDB:</div>
         <div class="row-start-4 text-pink-600 hover:text-green-500 "><a
             :href="'https://www.imdb.com/name/'+person.imdb_id" target="_blank">link</a>
@@ -40,8 +42,7 @@
 <script>
 
 import {personAxios} from "../../api";
-import {getImage} from "../../utils";
-import {convertDate} from "../../utils";
+import {getImage, convertDate, birthDate} from "../../utils";
 
 export default {
   name: 'MovieActorModal',
@@ -63,6 +64,7 @@ export default {
   methods: {
     convertDate,
     getImage,
+    birthDate,
     sex(value) {
       if (value === 2) {
         return 'Male'
