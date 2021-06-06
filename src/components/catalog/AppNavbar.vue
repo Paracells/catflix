@@ -1,10 +1,10 @@
 <template>
 
   <div
-      class="border-b grid grid-cols-3 justify-items-center p-4  md:pb-4 bg-gray-700 bg-opacity-80"
+      class="border-b grid lg:grid-cols-3 justify-items-center p-4 bg-gray-700 bg-opacity-80 md:grid-cols-1"
   >
     <nav class="justify-self-start">
-      <ul class="list-reset flex items-center">
+      <ul class="flex items-center">
         <li class="mr-4">
           <router-link
               @click="backToNowPlaying"
@@ -35,9 +35,9 @@
       </ul>
     </nav>
 
-    <div class="mb-4 md:mb-0 justify-self-center">
+    <div class="mb-4 md:mb-0 lg:justify-self-center md:justify-self-start">
       <input
-          class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full  bg-gray-700 placeholder-white text-white"
+          class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white"
           placeholder="Search a movie..."
           type="text"
           size="50"
@@ -46,7 +46,7 @@
       />
     </div>
     <transition name="fade">
-      <app-auth class="justify-self-end" @loggedStatus="logged"/>
+      <app-auth class="lg:justify-self-end md:justify-self-center" @loggedStatus="logged"/>
     </transition>
   </div>
 </template>

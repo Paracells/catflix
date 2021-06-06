@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="mt-4 uppercase mr-4 space-x-4 flex justify-end">
+    <ul class="mt-4 uppercase mr-4 space-x-4 flex justify-end sm:flex-col lg:flex-row">
       <li v-for="f in filteredArray" :key="f.name" class="button__filter" @click="filterPath(f)"
           :class="{'bg-green-500 hover:bg-green-800':f.name===filter}">{{
           f.filter

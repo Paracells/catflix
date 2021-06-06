@@ -1,6 +1,5 @@
 <template>
   <div class="h-full w-full relative">
-
     <div>
       <svg
           @click="$router.back()"

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-screen">
     <app-navbar/>
     <app-filter/>
     <app-movies/>
