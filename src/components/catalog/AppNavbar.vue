@@ -9,7 +9,7 @@
           <router-link
               @click="backToNowPlaying"
               class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
-              :class="{'text-yellow-500':homeActive}"
+              :class="{'text-yellow-500':!status}"
               :to="{name:'AppCatalog'}"
           >
             Catalog
@@ -19,7 +19,7 @@
           <li class="mr-1">
             <router-link @click="gotoFavorites"
                          class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
-                         :class="{'text-yellow-500':!homeActive}"
+                         :class="{'text-yellow-500':status}"
                          :to="{name:'AppCatalog'}"
 
             >
@@ -63,8 +63,6 @@ export default {
   data() {
     return {
       searchText: "",
-      favoritePage: false,
-      homeActive: true,
       logInApp: false,
       WARNING
 
@@ -83,17 +81,16 @@ export default {
 
     async loadFilms() {
       if (this.searchText) {
-        this.homeActive = true
         this.$store.commit("movies/setFilter", "");
         await this.searchFilms(this.searchText);
         this.searchText = ''
+        this.$store.commit('fav/resetFavoritePage')
 
       } else {
         this.backToNowPlaying();
       }
     },
     async backToNowPlaying() {
-      this.homeActive = true
       if (this.status) {
         this.$store.commit('fav/resetFavoritePage')
         if (this.getSavedFromFavorites.length === 0) {
@@ -106,7 +103,6 @@ export default {
       }
     },
     gotoFavorites() {
-      this.homeActive = false
       this.$store.commit('fav/setFavoritePage')
       this.$store.commit('movies/saveSearchMovies', this.getMovies)
       this.$store.commit('movies/setMovies', this.favorites)
@@ -114,7 +110,6 @@ export default {
 
   },
   async created() {
-    this.homeActive = this.favoritePage
     await this.$store.dispatch('fav/getFavorites')
   }
 
