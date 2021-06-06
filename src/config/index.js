@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCpTeU4QrZGg7eMB6G-oSMpy_RgOMgH2Yo",
+    apiKey: import.meta.env.VITE_APP_APIKEY,
     authDomain: "catflix-9786a.firebaseapp.com",
     projectId: "catflix-9786a",
     storageBucket: "catflix-9786a.appspot.com",

@@ -10,6 +10,7 @@ module.exports = {
             sans: ['Rubik', ...defaultTheme.fontFamily.sans],
             headline: ['Ubuntu Condensed']
         },
+       
     },
     variants: {
         extend: {

@@ -87,8 +87,6 @@ export default {
     ${this.actor}/movie_credits?api_key=${import.meta.env.VITE_APP_MOVIE_API_KEY}&language=en-US
     `)).data.cast
     this.personMovies = this.personMovies.length > 5 ? this.personMovies.slice(0, 5) : this.personMovies
-    console.log(this.person)
-    console.log(this.personMovies)
   }
 }
 

@@ -55,7 +55,6 @@ export default {
   methods: {
     getImage,
     showMovieModal(id) {
-      console.log(id)
       this.actorId = id
       this.modalActor = true
     }

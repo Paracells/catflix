@@ -13,7 +13,6 @@ const movie = {
             return state.movie;
         },
         getCast: (state) => {
-            console.log(state.credits)
             return state.credits;
         },
         getCrew: (state) => {
