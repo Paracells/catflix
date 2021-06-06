@@ -29,7 +29,8 @@ const movies = {
         },
         saveSearchMovies(state, payload) {
             state.savedFromFavorites = payload
-        }
+        },
+
 
     },
     actions: {
@@ -51,6 +52,11 @@ const movies = {
                 }&language=en-US&query=${searchString}&page=1&include_adult=false`
             );
             commit("setMovies", result.data.results);
+        },
+        async resetFilter({commit, dispatch, state}) {
+            const filter = state.filteredClass ? state.filteredClass : "now_playing"
+            commit('setFilter', filter)
+            await dispatch('getFilms', this.getFilter ? this.getFilter : filter)
         },
 
     },

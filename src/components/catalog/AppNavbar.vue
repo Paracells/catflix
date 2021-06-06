@@ -75,7 +75,7 @@ export default {
     ...mapGetters("fav", {favorites: 'getFavorites', status: "getPageStatus", counter: "getFavoriteLength"}),
   },
   methods: {
-    ...mapActions("movies", ["searchFilms", "getFilms"]),
+    ...mapActions("movies", ["searchFilms", "getFilms", 'resetFilter']),
 
     logged(value) {
       this.logInApp = value
@@ -92,23 +92,18 @@ export default {
         this.backToNowPlaying();
       }
     },
-    backToNowPlaying() {
+    async backToNowPlaying() {
       this.homeActive = true
       if (this.status) {
         this.$store.commit('fav/resetFavoritePage')
         if (this.getSavedFromFavorites.length === 0) {
-          this.resetFilter()
+          await this.resetFilter()
         } else {
           this.$store.commit('movies/setMovies', this.getSavedFromFavorites)
         }
       } else {
-        this.resetFilter()
+        await this.resetFilter()
       }
-    },
-    resetFilter() {
-      const filter = this.getFilter ? this.getFilter : "now_playing"
-      this.$store.commit('movies/setFilter', filter)
-      this.getFilms(this.getFilter ? this.getFilter : filter);
     },
     gotoFavorites() {
       this.homeActive = false
@@ -119,6 +114,7 @@ export default {
 
   },
   async created() {
+    this.homeActive = this.favoritePage
     await this.$store.dispatch('fav/getFavorites')
   }
 

@@ -53,8 +53,9 @@ export default {
       }
     },
     async logout() {
-      await this.$store.dispatch('auth/logout')
+      this.$store.dispatch('auth/logout')
       this.$store.commit('fav/setFavorites', [])
+      await this.$store.dispatch('movies/resetFilter')
       if (!this.getError.status) {
         this.logged = false
       }

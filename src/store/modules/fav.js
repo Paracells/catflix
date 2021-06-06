@@ -33,7 +33,7 @@ const fav = {
 
     },
     actions: {
-        async addToFavorite({rootGetters}, payload) {
+        async addToFavorite({rootGetters, dispatch}, payload) {
             const user = rootGetters["auth/getUser"]
             if (user) {
                 await db.collection(database).doc(user.email)

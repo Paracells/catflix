@@ -70,7 +70,7 @@ const user = {
 
         },
 
-        async logout({commit}) {
+        logout({commit}) {
             commit('deleteUser')
             commit('setError', {status: false, text: ''})
         },
