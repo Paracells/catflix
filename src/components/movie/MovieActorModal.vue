@@ -10,7 +10,7 @@
           class="grid grid-cols-4 row-auto  bg-gray-800 py-4 px-2 w-full rounded-xl gap-2 "
       >
         <div class="row-start-1">Name:</div>
-        <div class="row-start-1">{{ person.name }}</div>
+        <div class="row-start-1 col-span-2">{{ person.name }}</div>
         <div class="row-start-2">Gender:</div>
         <div class="row-start-2">{{ sex(person.gender) }}</div>
         <div class="row-start-3">Birthday:</div>
@@ -20,7 +20,7 @@
             :href="'https://www.imdb.com/name/'+person.imdb_id" target="_blank">link</a>
         </div>
         <div class="row-start-5">Place of Birth:</div>
-        <div class="row-start-5 col-span-2">{{ person.place_of_birth }}
+        <div class="row-start-5 col-span-2">{{ person.place_of_birth ? person.place_of_birth : 'no data' }}
         </div>
         <div class="col-start-4 row-start-1 row-end-6">
           <img class="h-auto row-start-1 row-end-6 object-cover col-start-4 col-span-8 " :src="imgLink" alt="">
@@ -63,6 +63,13 @@ export default {
     convertDate,
     getImage,
     sex(value) {
+      if (value === 2) {
+        return 'Male'
+      } else if (value === 1) {
+        return 'Female'
+      }
+      return 'no data'
+
       return value === 2 ? 'Male' : 'Female'
     }
   },
