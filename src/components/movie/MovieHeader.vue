@@ -78,7 +78,7 @@
 import {calcLength, getImage} from "../../utils";
 import {mapGetters} from "vuex";
 import AppNotification from "../AppNotification.vue";
-import {ALERT, WARNING, SUCCESS} from "../../utils/color";
+import {ALERT, SUCCESS, WARNING} from "../../utils/color";
 
 export default {
   name: "MovieHeader",
@@ -106,7 +106,6 @@ export default {
   },
   methods: {
     toggleFavorite() {
-      console.log(this.$store.getters['auth/getUser'])
       if (this.$store.getters['auth/getUser']) {
         if (this.favorite) {
           this.setNotification("Removed from favorites", ALERT, 'off')
@@ -132,8 +131,7 @@ export default {
   }
   ,
   async created() {
-    const result = getImage(this.movie, "backdrop_path");
-    this.imageLink = result;
+    this.imageLink = getImage(this.movie, "backdrop_path");
     this.favorite = this.byId(this.movie.id);
   }
   ,

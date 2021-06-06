@@ -29,7 +29,7 @@
           <li
               class="bg-red-500 h-5 w-5 mb-4 text-white text-center flex items-center justify-center rounded-full"
           >
-            {{ favorites.length }}
+            {{ counter }}
           </li>
         </template>
       </ul>
@@ -72,10 +72,11 @@ export default {
   },
   computed: {
     ...mapGetters("movies", ["getMovies", "getFilter", 'getSavedFromFavorites']),
-    ...mapGetters("fav", {favorites: "getFavorites", status: "getPageStatus"}),
+    ...mapGetters("fav", {favorites: 'getFavorites', status: "getPageStatus", counter: "getFavoriteLength"}),
   },
   methods: {
     ...mapActions("movies", ["searchFilms", "getFilms"]),
+
     logged(value) {
       this.logInApp = value
     },
@@ -112,15 +113,14 @@ export default {
     gotoFavorites() {
       this.homeActive = false
       this.$store.commit('fav/setFavoritePage')
-
       this.$store.commit('movies/saveSearchMovies', this.getMovies)
       this.$store.commit('movies/setMovies', this.favorites)
-      if (this.$store.getters['auth/getUser']) {
-
-      }
     },
 
   },
+  async created() {
+    await this.$store.dispatch('fav/getFavorites')
+  }
 
 }
 </script>

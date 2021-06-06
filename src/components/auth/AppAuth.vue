@@ -61,7 +61,6 @@ export default {
   async created() {
     this.loading = true
     await this.$store.dispatch('auth/navBarLoad')
-    console.log("this.getUserName", this.getUserName)
     if (this.getUserName) {
       this.username = this.getUserName
       this.logged = true
