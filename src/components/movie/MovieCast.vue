@@ -5,9 +5,9 @@
     </div>
     <div class="mt-6 ml-5 p-12 inline-block bg-gray-800 rounded-lg bg-opacity-50">
       <ul class="flex justify-start items-center space-x-6">
-        <li v-for="i in cast" :key="i.id">
+        <li v-for="i in cast" :key="i.id" @click="showMovieModal(i.id)">
           <template
-              class="flex flex-col bg-purple-50-500  bg-opacity-20 ring-4 rounded-md ring-gray-900 relative hover:ring-gray-700 w-[192px] h-[287px]">
+              class="cursor-pointer flex flex-col bg-purple-50-500  bg-opacity-20 ring-4 rounded-md ring-gray-900 relative hover:ring-gray-700 w-[192px] h-[287px]">
             <img class="object-cover rounded-md h-full"
                  :src="getImage(i, 'profile_path')"
                  :alt=" i.original_name">
@@ -16,11 +16,12 @@
             <p class="text-white m-4 text-center mt-3 p-2 bg-indigo-600 bg-opacity-20">
               {{ i.character ? i.character : 'no data' }}</p>
           </template>
-
         </li>
       </ul>
     </div>
-
+    <transition name="fade">
+      <movie-actor-modal v-if="modalActor" :actor="actorId" @close="modalActor=false"/>
+    </transition>
   </div>
 </template>
 
@@ -28,13 +29,17 @@
 import {mapGetters} from 'vuex'
 import {calcLength} from "../../utils";
 import {getImage} from "../../utils";
+import MovieActorModal from "./MovieActorModal.vue";
 
 
 export default {
   name: "MovieCast",
+  components: {MovieActorModal},
   data() {
     return {
-      photo: ''
+      photo: '',
+      modalActor: false,
+      actorId: ''
 
     }
   },
@@ -48,7 +53,12 @@ export default {
     },
   },
   methods: {
-    getImage
+    getImage,
+    showMovieModal(id) {
+      console.log(id)
+      this.actorId = id
+      this.modalActor = true
+    }
   },
 
 }

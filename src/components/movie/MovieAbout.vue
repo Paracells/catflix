@@ -4,7 +4,7 @@
     <div class="flex flex-col  ml-5 text-white mt-5">
       <div class="grid grid-flow-col gap-4">
         <div class="col-start-1">Release</div>
-        <div class="col-start-2">{{ new Date(movie.release_date).toLocaleDateString() }}</div>
+        <div class="col-start-2">{{ convertDate(movie.release_date) }}</div>
         <div class="col-start-1">Homepage</div>
         <div class="col-start-2">
           <p v-if="!movie.homepage">no data</p>
@@ -42,12 +42,16 @@
 <script>
 
 import {mapGetters} from "vuex";
+import {convertDate} from "../../utils";
 
 export default {
   name: "AboutFilm",
   computed: {
     ...mapGetters("movie", {movie: 'getCurrentMovie', crew: 'getCrew', keywords: 'getKeywords'}),
 
+  },
+  methods: {
+    convertDate
   }
 }
 </script>

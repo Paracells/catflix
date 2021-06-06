@@ -7,4 +7,8 @@ const movieAxios = axios.create({
 const searchAxios = axios.create({
     baseURL: 'https://api.themoviedb.org/3/'
 })
-export {movieAxios, searchAxios}
+
+const personAxios = axios.create({
+    baseURL: 'https://api.themoviedb.org/3/person/'
+})
+export {movieAxios, searchAxios, personAxios}

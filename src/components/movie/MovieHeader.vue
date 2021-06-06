@@ -21,7 +21,7 @@
       <app-notification v-if="showNotify" :message="message" :color="color" @closeNotification="showNotify=false"/>
     </transition>
 
-    <img class="object-cover h-80 w-full" loading="lazy" :src="imageLink"/>
+    <img class="object-cover h-80 w-full" loading="lazy" :src="imageLink" alt="img"/>
     <div
         class="font-headline tracking-wider absolute bottom-40 left-5 text-7xl font-extrabold text-yellow-400"
     >
@@ -87,10 +87,9 @@ export default {
     return {
       favorite: false,
       imageLink: '',
-      message: 'sadfasdf',
-      color: 'bg-green-500',
+      message: '',
+      color: '',
       showNotify: false,
-      anim: 'fade'
 
     }
   },
@@ -108,13 +107,13 @@ export default {
     toggleFavorite() {
       if (this.$store.getters['auth/getUser']) {
         if (this.favorite) {
-          this.setNotification("Removed from favorites", ALERT, 'off')
+          this.setNotification("Removed from favorites", ALERT)
           this.$store.dispatch("fav/removeFavorite", this.movie);
           if (this.page) {
             this.$store.commit('movies/removeById', this.movie.id)
           }
         } else {
-          this.setNotification("Added to favorites", SUCCESS, 'fade')
+          this.setNotification("Added to favorites", SUCCESS)
           this.$store.dispatch("fav/addToFavorite", this.movie);
         }
         this.favorite = !this.favorite;
@@ -128,26 +127,11 @@ export default {
       this.showNotify = true
 
     }
-  }
-  ,
+  },
   async created() {
     this.imageLink = getImage(this.movie, "backdrop_path");
     this.favorite = this.byId(this.movie.id);
   }
-  ,
 }
-;
 </script>
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-</style>

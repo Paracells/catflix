@@ -10,6 +10,7 @@ export const database = 'USERS'
  * @returns {string}
  */
 export function calcLength(line) {
+    
     return line.split(" ").length > 30
         ? line.split(" ").splice(0, 30).join(" ").concat("...")
         : line;
@@ -29,4 +30,8 @@ export function getImage(id, key) {
         return "https://image.tmdb.org/t/p/w500/" + image
     }
     return noPhoto
+}
+
+export function convertDate(date) {
+    return new Date(date).toLocaleDateString()
 }
