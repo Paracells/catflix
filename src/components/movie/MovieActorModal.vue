@@ -26,10 +26,11 @@
           <img class="h-auto row-start-1 row-end-6 object-cover col-start-4 col-span-8 " :src="imgLink" alt="">
         </div>
         <div class="row-start-6 text-yellow-500 mt-2">Movies</div>
-        <div class="row-start-7 row-end-7 inline-block col-span-5 inline-flex space-x-4 mt-2">
+        <transition-group tag="div" name="fade"
+                          class="row-start-7 row-end-7 inline-block col-span-5 inline-flex space-x-4 mt-2">
           <img class="w-[138px] h-28 object-cover " :src="getImage(i, 'poster_path')" :alt="i.original_title"
-               v-for="i in personMovies">
-        </div>
+               v-for="i in personMovies" :key="i.id">
+        </transition-group>
       </div>
 
     </div>
