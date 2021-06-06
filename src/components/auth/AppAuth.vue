@@ -43,16 +43,18 @@ export default {
     ...mapGetters('auth', ['getError', 'getUserName'])
   },
   methods: {
-    getUserData(name) {
+    async getUserData(name) {
       this.showSignup = false
       this.showSignIn = false
       if (name) {
         this.username = name
+        await this.$store.dispatch('fav/getFavorites')
         this.logged = true
       }
     },
     async logout() {
       await this.$store.dispatch('auth/logout')
+      this.$store.commit('fav/setFavorites', [])
       if (!this.getError.status) {
         this.logged = false
       }

@@ -100,7 +100,6 @@ export default {
     async close(values) {
       await this.$store.dispatch('auth/loadUser', values)
       if (!this.getError.status) {
-
         this.$emit("close", this.getUserName);
       }
 
