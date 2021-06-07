@@ -35,6 +35,29 @@
         @apply bg-indigo-900 bg-opacity-40 shadow-xl px-2 py-1 rounded-lg ring-2 ring-offset-blue-800 ring-gray-700 mt-5 cursor-pointer hover:bg-blue-900 hover:bg-opacity-100 transition
     }
 
+    .app__filter {
+        @apply mt-4
+        uppercase
+        lg:mr-4
+        lg:space-x-4
+        m-4
+        flex
+        justify-end
+        sm:flex-col
+        flex-col
+        md:flex-row
+        md:space-x-4
+    }
+
+    .navbar__layout {
+        @apply border-b
+        lg:grid
+        lg:grid-cols-3
+        justify-items-center
+        p-4
+        bg-gray-700 bg-opacity-80
+    }
+
 }
 
 .fade-enter-active,

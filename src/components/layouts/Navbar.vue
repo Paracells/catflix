@@ -1,28 +1,12 @@
 <template>
   <div>
-    <div
-        class="
-        border-b
-        grid
-        lg:grid-cols-3
-        justify-items-center
-        p-4
-        bg-gray-700 bg-opacity-80
-        md:grid-cols-1
-      "
-    >
+    <div class="navbar__layout">
       <nav class="justify-self-start">
         <ul class="flex items-center">
           <li class="mr-4">
             <router-link
                 @click="backToNowPlaying"
-                class="
-                text-white
-                block
-                py-2
-                text-grey-darkest
-                hover:text-indigo-500
-              "
+                class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
                 :class="{ 'text-yellow-500': !status }"
                 :to="{ name: 'AppCatalog' }"
             >

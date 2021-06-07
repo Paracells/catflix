@@ -1,21 +1,23 @@
 <template>
-  <div v-if="!loading">
-    <div v-if="!logged">
-      <button @click="showSignIn = true" class="btn-header">Login</button>
-      <button @click="showSignup = true" class="btn-header hover:bg-blue-400">
-        Signup
-      </button>
-      <transition name="fade">
-        <app-login v-if="showSignIn" @close="getUserData"/>
-      </transition>
-      <transition name="fade">
-        <app-signup v-if="showSignup" @close="getUserData"/>
-      </transition>
-    </div>
-    <div v-else>
-      <span class="mr-6">Hello, <span class="text-green-500">{{ username }}</span> </span>
-      <button class="btn-header" @click="logout">LOGOUT</button>
+  <div>
+    <div v-if="!loading">
+      <div v-if="!logged" class="md:flex">
+        <button @click="showSignIn = true" class="btn-header">Login</button>
+        <button @click="showSignup = true" class="btn-header hover:bg-blue-400">
+          Signup
+        </button>
+        <transition name="fade">
+          <app-login v-if="showSignIn" @close="getUserData"/>
+        </transition>
+        <transition name="fade">
+          <app-signup v-if="showSignup" @close="getUserData"/>
+        </transition>
+      </div>
+      <div v-else class="md:flex">
+        <span class="mr-6">Hello, <span class="text-green-500">{{ username }}</span> </span>
+        <button class="btn-header" @click="logout">LOGOUT</button>
 
+      </div>
     </div>
   </div>
 
