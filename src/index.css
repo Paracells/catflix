@@ -58,6 +58,34 @@
         bg-gray-700 bg-opacity-80
     }
 
+    .ul__movie-cast {
+        @apply lg:flex xl:justify-start xl:flex-row xl:items-center xl:space-x-6 sm:grid sm:grid-cols-2 grid grid-cols-2 items-center
+    }
+
+    .img__movie-cast {
+        @apply cursor-pointer flex flex-col bg-purple-500  bg-opacity-20 ring-4 rounded-md ring-gray-900 relative hover:ring-gray-700 w-[192px] h-[287px]
+    }
+
+    .favorite__movie {
+        @apply lg:w-28 lg:h-28 md:w-16 md:h-16 bg-green-500 hover:ring-pink-500 cursor-pointer bg-opacity-50 ring-4 mr-4 flex items-center justify-center rounded-full text-pink-600
+    }
+
+    .favorite__vote {
+        @apply lg:w-28 lg:h-28 md:w-16 md:h-16 bg-indigo-500 bg-opacity-50 ring-4 mr-4 font-extrabold flex items-center justify-center rounded-full text-yellow-400 text-5xl
+    }
+
+    .title__hover {
+        @apply text-white bg-indigo-400 bg-opacity-50 text-opacity-80 w-5/6 text-center absolute top-5 left-7 text-xl font-semibold rounded-lg transform transition duration-500
+    }
+
+    .navbar__counter {
+        @apply bg-red-500 h-5 w-5 mb-4 text-white text-center flex items-center justify-center rounded-full
+    }
+
+    .input__search {
+        @apply border-2 p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white
+    }
+
 }
 
 .fade-enter-active,

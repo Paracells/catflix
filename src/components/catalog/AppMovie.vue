@@ -12,7 +12,7 @@
       </div>
     </router-link>
     <div
-        class="text-white bg-indigo-400 bg-opacity-50 text-opacity-80 w-5/6 text-center absolute top-5 left-7 text-xl font-semibold rounded-lg transform transition duration-500"
+        class="title__hover"
         :class="titleHover"
     >
       {{ movie.original_title }}

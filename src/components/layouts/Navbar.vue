@@ -17,12 +17,7 @@
             <li class="mr-1">
               <router-link
                   @click="gotoFavorites"
-                  class="
-                  text-white
-                  block
-                  py-2
-                  text-grey-darkest
-                  hover:text-indigo-500
+                  class="text-white block py-2 text-grey-darkest hover:text-indigo-500
                 "
                   :class="{ 'text-yellow-500': status }"
                   :to="{ name: 'AppCatalog' }"
@@ -30,19 +25,7 @@
                 My Favorites
               </router-link>
             </li>
-            <li
-                class="
-                bg-red-500
-                h-5
-                w-5
-                mb-4
-                text-white text-center
-                flex
-                items-center
-                justify-center
-                rounded-full
-              "
-            >
+            <li class="navbar__counter">
               {{ counter }}
             </li>
           </template>
@@ -51,18 +34,7 @@
 
       <div class="mb-4 md:mb-0 lg:justify-self-center md:justify-self-start">
         <input
-            class="
-            bg-grey-lightest
-            border-2
-            focus:border-orange
-            p-2
-            rounded-lg
-            shadow-inner
-            w-full
-            bg-gray-700
-            placeholder-white
-            text-white
-          "
+            class="input__search"
             placeholder="Search a movie..."
             type="text"
             size="50"

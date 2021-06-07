@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-screen relative">
+  <div class="h-full w-full relative">
     <div>
       <svg
           @click="$router.back()"
@@ -22,7 +22,7 @@
 
     <img class="object-cover h-80 lg:w-full md:w-screen sm:w-screen" loading="lazy" :src="imageLink" alt="img"/>
     <div
-        class="font-headline tracking-wider absolute bottom-40 left-5 text-7xl font-extrabold text-yellow-400"
+        class="font-headline tracking-wider absolute bottom-40 left-5 text-7xl font-bold text-yellow-400"
     >
       {{ movie.title }}
     </div>
@@ -34,12 +34,12 @@
       </div>
       <div class="inline-flex">
         <div
-            class="lg:w-28 lg:h-28 md:w-16 md:h-16 bg-indigo-500 bg-opacity-50 ring-4 mr-4 font-extrabold flex items-center justify-center rounded-full text-yellow-400 text-5xl"
+            class="favorite__vote"
         >
           {{ movie.vote_average }}
         </div>
         <div
-            class="lg:w-28 lg:h-28 md:w-16 md:h-16 bg-green-500 hover:ring-pink-500 cursor-pointer bg-opacity-50 ring-4 mr-4 flex items-center justify-center rounded-full text-pink-600"
+            class="favorite__movie"
             @click="toggleFavorite"
         >
           <svg
@@ -129,6 +129,7 @@ export default {
   },
   async created() {
     this.imageLink = getImage(this.movie, "backdrop_path");
+    await this.$store.dispatch('fav/getFavorites')
     this.favorite = this.byId(this.movie.id);
   }
 }
