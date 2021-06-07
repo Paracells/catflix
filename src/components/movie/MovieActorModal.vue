@@ -72,8 +72,6 @@ export default {
         return 'Female'
       }
       return 'no data'
-
-      return value === 2 ? 'Male' : 'Female'
     }
   },
   computed: {

@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "../views/Home.vue";
+import NotFound from "../components/NotFound.vue";
 
 const routes = [
     {
@@ -12,14 +13,16 @@ const routes = [
         // каталог фильмов
         path: "/movies",
         name: "AppCatalog",
+        meta: {layout: 'navbar'},
         component: () => import("../components/catalog/AppCatalog.vue"),
 
+
     },
-   
     {
         // карточка-компонент отдельного фильма
         path: "/movies/:id",
         name: "TheMovie",
+        meta: {layout: 'empty'},
         component: () => import("../views/TheMovie.vue"),
 
 
@@ -32,13 +35,12 @@ const routes = [
             }
 
         }
-
     },
     {
         // 404 по всем другим адресам
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: () => import("../components/NotFound.vue"),
+        component: NotFound,
 
     },
 
