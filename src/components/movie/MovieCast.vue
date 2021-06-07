@@ -4,7 +4,7 @@
       Cast
     </div>
     <div class="mt-6 ml-5 p-12 xl:inline-block bg-gray-800 rounded-lg bg-opacity-50 lg:block">
-      <ul class="flex xl:justify-start xl:flex xl:flex-row xl:items-center xl:space-x-6 ">
+      <ul class="lg:flex xl:justify-start xl:flex-row xl:items-center xl:space-x-6 sm:grid sm:grid-cols-2 grid grid-cols-2 items-center">
         <li v-for="i in cast" :key="i.id" @click="showMovieModal(i.id)">
           <template
               class="cursor-pointer flex flex-col bg-purple-50-500  bg-opacity-20 ring-4 rounded-md ring-gray-900 relative hover:ring-gray-700 w-[192px] h-[287px]">

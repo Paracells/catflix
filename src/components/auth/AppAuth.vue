@@ -13,7 +13,7 @@
           <app-signup v-if="showSignup" @close="getUserData"/>
         </transition>
       </div>
-      <div v-else class="md:flex">
+      <div v-else class="md:flex lg:block">
         <span class="mr-6">Hello, <span class="text-green-500">{{ username }}</span> </span>
         <button class="btn-header" @click="logout">LOGOUT</button>
 

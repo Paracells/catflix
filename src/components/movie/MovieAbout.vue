@@ -25,13 +25,13 @@
         <div class="col-start-1">Writing</div>
         <div class="col-start-2">{{ crew.writing ? crew.writing : 'no data' }}</div>
         <div class="col-start-1">Keywords</div>
-        <div class="col-start-2 space-x-4 space-y-2">
+        <div class="col-start-2 flex flex-wrap md:mr-4 justify-start md:space-x-4">
           <p class="inline-block" v-if="keywords.length===0">no data</p>
-          <p v-else class="inline-block" v-for="keyword in keywords"><span
+          <div v-else class="m-4 lg:m-0" v-for="keyword in keywords"><span
               class="chips bg-green-900">{{
               keyword
             }}</span>
-          </p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full relative">
+  <div class="h-full w-screen relative">
     <div>
       <svg
           @click="$router.back()"
@@ -20,26 +20,26 @@
       <app-notification v-if="showNotify" :message="message" :color="color" @closeNotification="showNotify=false"/>
     </transition>
 
-    <img class="object-cover h-80 w-full" loading="lazy" :src="imageLink" alt="img"/>
+    <img class="object-cover h-80 lg:w-full md:w-screen sm:w-screen" loading="lazy" :src="imageLink" alt="img"/>
     <div
         class="font-headline tracking-wider absolute bottom-40 left-5 text-7xl font-extrabold text-yellow-400"
     >
       {{ movie.title }}
     </div>
-    <div class="flex justify-between items-center -mt-16 flex-row">
+    <div class="flex justify-between items-center -mt-16 lg:flex-row">
       <div
-          class="text-white ml-5 bg-gray-700 text-3xl tracking-tight w-2/4 bg-opacity-50"
+          class="text-white ml-5 bg-gray-700 lg:text-3xl tracking-tight w-2/4 bg-opacity-50 md:text-lg"
       >
         {{ overView }}
       </div>
       <div class="inline-flex">
         <div
-            class="w-28 h-28 bg-indigo-500 bg-opacity-50 ring-4 mr-4 font-extrabold flex items-center justify-center rounded-full text-yellow-400 text-5xl"
+            class="lg:w-28 lg:h-28 md:w-16 md:h-16 bg-indigo-500 bg-opacity-50 ring-4 mr-4 font-extrabold flex items-center justify-center rounded-full text-yellow-400 text-5xl"
         >
           {{ movie.vote_average }}
         </div>
         <div
-            class="w-28 h-28 bg-green-500 hover:ring-pink-500 cursor-pointer bg-opacity-50 ring-4 mr-4 flex items-center justify-center rounded-full text-pink-600"
+            class="lg:w-28 lg:h-28 md:w-16 md:h-16 bg-green-500 hover:ring-pink-500 cursor-pointer bg-opacity-50 ring-4 mr-4 flex items-center justify-center rounded-full text-pink-600"
             @click="toggleFavorite"
         >
           <svg
