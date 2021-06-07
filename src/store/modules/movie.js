@@ -1,5 +1,7 @@
 import {movieAxios} from "../../api";
+import mutations from '../../utils/mutation-types'
 
+const {SET_MOVIE, SET_CREDITS, SET_CREW, SET_KEYWORDS} = mutations
 const movie = {
     namespaced: true,
     state: {
@@ -28,16 +30,16 @@ const movie = {
     },
     mutations: {
 
-        setMovie(state, payload) {
+        [SET_MOVIE](state, payload) {
             state.movie = payload;
         },
-        setCredits(state, payload) {
+        [SET_CREDITS](state, payload) {
             state.credits = payload
         },
-        setCrew(state, payload) {
+        [SET_CREW](state, payload) {
             state.crew = payload
         },
-        setKeywords(state, payload) {
+        [SET_KEYWORDS](state, payload) {
             state.keywords = payload
         }
     },
@@ -48,7 +50,7 @@ const movie = {
                 import.meta.env.VITE_APP_MOVIE_API_KEY
             }&language=en-US`).catch(() => null)
             if (result) {
-                commit("setMovie", result.data);
+                commit(SET_MOVIE, result.data);
             }
         },
 
@@ -56,14 +58,14 @@ const movie = {
             const result = await movieAxios.get(`${id}/credits?api_key=${
                 import.meta.env.VITE_APP_MOVIE_API_KEY
             }&language=en-US`)
-            commit("setCrew", result.data.crew);
-            commit("setCredits", result.data.cast.splice(0, 5));
+            commit(SET_CREW, result.data.crew);
+            commit(SET_CREDITS, result.data.cast.splice(0, 5));
         },
         async getKeywords({commit}, id) {
             const result = await movieAxios.get(`${id}/keywords?api_key=${
                 import.meta.env.VITE_APP_MOVIE_API_KEY
             }&language=en-US`)
-            commit("setKeywords", result.data.keywords);
+            commit(SET_KEYWORDS, result.data.keywords);
         },
 
 

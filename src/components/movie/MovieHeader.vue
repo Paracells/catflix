@@ -109,7 +109,7 @@ export default {
           this.setNotification("Removed from favorites", ALERT)
           this.$store.dispatch("fav/removeFavorite", this.movie);
           if (this.page) {
-            this.$store.commit('movies/removeById', this.movie.id)
+            this.$store.commit('movies/REMOVE_BY_ID', this.movie.id)
           }
         } else {
           this.setNotification("Added to favorites", SUCCESS)

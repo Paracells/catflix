@@ -1,5 +1,8 @@
 import {db} from "../../config";
 import {database} from "../../utils";
+import mutations from '../../utils/mutation-types'
+
+const {SET_ERROR, SET_USERDATA, DELETE_USER} = mutations
 
 const user = {
     namespaced: true,
@@ -15,14 +18,14 @@ const user = {
 
     },
     mutations: {
-        setError(state, payload) {
+        [SET_ERROR](state, payload) {
             state.error = {status: payload.status, text: payload.text}
         },
-        setUserData(state, payload) {
+        [SET_USERDATA](state, payload) {
             localStorage.setItem('user', JSON.stringify(payload))
             state.userData = payload
         },
-        deleteUser(state) {
+        [DELETE_USER](state) {
             state.userData = {}
             localStorage.removeItem('user')
         }
@@ -36,20 +39,20 @@ const user = {
                         password: values.password,
                         favorites: []
                     })
-                commit('setUserData', {name: values.name, email: values.email})
-                commit('setError', {status: false, text: ''})
+                commit('SET_USERDATA', {name: values.name, email: values.email})
+                commit('SET_ERROR', {status: false, text: ''})
             } else {
-                commit('setError', {status: true, text: 'The provided email is already in use by an existing user.'})
+                commit('SET_ERROR', {status: true, text: 'The provided email is already in use by an existing user.'})
             }
         },
 
         async loadUser({commit, dispatch}, payload) {
             const result = await dispatch("checkIfExists", payload.email)
             if (result.password === payload.password) {
-                commit('setUserData', {name: result.name, email: payload.email})
-                commit('setError', {status: false, text: ''})
+                commit(SET_USERDATA, {name: result.name, email: payload.email})
+                commit(SET_ERROR, {status: false, text: ''})
             } else {
-                commit('setError', {
+                commit(SET_ERROR, {
                     status: true,
                     text: 'There is no existing user record corresponding to the provided identifier.'
                 })
@@ -60,8 +63,8 @@ const user = {
             const user = data ? JSON.parse(data) : false
             const dbQuery = await dispatch('checkIfExists', user.email)
             if (dbQuery) {
-                commit('setUserData', user)
-                commit('setError', {status: false, text: ''})
+                commit(SET_USERDATA, user)
+                commit(SET_ERROR, {status: false, text: ''})
             }
         },
 
@@ -71,8 +74,8 @@ const user = {
         },
 
         logout({commit}) {
-            commit('deleteUser')
-            commit('setError', {status: false, text: ''})
+            commit(DELETE_USER)
+            commit(SET_ERROR, {status: false, text: ''})
         },
 
 

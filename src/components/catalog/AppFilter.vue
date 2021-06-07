@@ -36,7 +36,7 @@ export default {
 
   methods: {
     filterPath(filter) {
-      this.$store.commit('movies/setFilter', filter.name)
+      this.$store.commit('movies/SET_FILTER', filter.name)
       this.$store.dispatch("movies/getFilms", filter.name)
     }
   },

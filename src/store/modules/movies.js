@@ -1,4 +1,7 @@
 import {movieAxios, searchAxios} from "../../api";
+import mutations from '../../utils/mutation-types'
+
+const {SET_MOVIES, SET_FILTER, REMOVE_BY_ID, SAVE_SEARCH_MOVIES} = mutations
 
 const movies = {
     namespaced: true,
@@ -16,18 +19,16 @@ const movies = {
 
     },
     mutations: {
-        setMovies(state, payload) {
+        [SET_MOVIES](state, payload) {
             state.movies = payload;
         },
-        setFilter(state, payload) {
+        [SET_FILTER](state, payload) {
             state.filteredClass = payload
         },
-
-
-        removeById(state, id) {
+        [REMOVE_BY_ID](state, id) {
             state.movies = state.movies.filter(el => el.id !== +id)
         },
-        saveSearchMovies(state, payload) {
+        [SAVE_SEARCH_MOVIES](state, payload) {
             state.savedFromFavorites = payload
         },
 
@@ -40,7 +41,7 @@ const movies = {
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }`
             );
-            commit("setMovies", result.data.results);
+            commit(SET_MOVIES, result.data.results);
         },
 
 
@@ -51,11 +52,11 @@ const movies = {
                     import.meta.env.VITE_APP_MOVIE_API_KEY
                 }&language=en-US&query=${searchString}&page=1&include_adult=false`
             );
-            commit("setMovies", result.data.results);
+            commit(SET_MOVIES, result.data.results);
         },
         async resetFilter({commit, dispatch, state}) {
             const filter = state.filteredClass ? state.filteredClass : "now_playing"
-            commit('setFilter', filter)
+            commit(SET_FILTER, filter)
             await dispatch('getFilms', this.getFilter ? this.getFilter : filter)
         },
 

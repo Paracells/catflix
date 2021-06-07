@@ -105,7 +105,7 @@ export default {
 
     },
     exitForm() {
-      this.$store.commit('auth/setError', {status: false, text: false})
+      this.$store.commit('auth/SET_ERROR', {status: false, text: false})
       this.$emit('close')
     }
   }

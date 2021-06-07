@@ -54,8 +54,8 @@ export default {
     },
     async logout() {
       this.$store.dispatch('auth/logout')
-      this.$store.commit('fav/resetFavoritePage')
-      this.$store.commit('fav/setFavorites', [])
+      this.$store.commit('fav/RESET_FAVORITE_PAGE')
+      this.$store.commit('fav/SET_FAVORITES', [])
       await this.$store.dispatch('movies/resetFilter')
       this.logged = false
     }
