@@ -14,7 +14,9 @@
         </transition>
       </div>
       <div v-else class="md:flex lg:block">
-        <span class="mr-6">Hello, <span class="text-green-500">{{ username }}</span> </span>
+        <span class="mr-6"><span class="text-white">Hello, </span><span class="dark:text-green-500 text-yellow-500">{{
+            username
+          }}</span> </span>
         <button class="btn-header" @click="logout">LOGOUT</button>
 
       </div>

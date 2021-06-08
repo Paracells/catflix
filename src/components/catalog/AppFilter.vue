@@ -10,7 +10,7 @@
             :key="f.name"
             class="button__filter"
             @click="filterPath(f)"
-            :class="{ 'bg-green-500 hover:bg-green-800': f.name === filter }"
+            :class="{ 'dark:bg-green-500 bg-green-200 dark:hover:bg-green-800 hover:bg-green-500 text-gray-900 dark:text-white': f.name === filter }"
         >
           {{ f.filter }}
         </li>

@@ -2,7 +2,7 @@
   <div class="relative" @mouseover="show = true" @mouseout="show = false">
     <router-link :to="{ name: 'TheMovie', params: { id: movie.id } }">
       <div
-          class="bg-gray-800 rounded-3xl p-2 cursor-pointer ring-2">
+          class="dark:bg-gray-800 bg-green-800 rounded-3xl p-2 cursor-pointer ring-2">
         <img
             :src="imageLink"
             :alt="movie.original_title"
