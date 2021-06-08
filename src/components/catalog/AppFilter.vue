@@ -1,25 +1,32 @@
 <template>
-  <div>
-    <ul class="app__filter">
-      <li
-          v-for="f in filteredArray"
-          :key="f.name"
-          class="button__filter"
-          @click="filterPath(f)"
-          :class="{ 'bg-green-500 hover:bg-green-800': f.name === filter }"
-      >
-        {{ f.filter }}
-      </li>
-    </ul>
+  <div class="flex justify-between items-start">
+    <div class="mt-8 ml-4">
+      <switch-theme/>
+    </div>
+    <div>
+      <ul class="app__filter">
+        <li
+            v-for="f in filteredArray"
+            :key="f.name"
+            class="button__filter"
+            @click="filterPath(f)"
+            :class="{ 'bg-green-500 hover:bg-green-800': f.name === filter }"
+        >
+          {{ f.filter }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 
 <script>
 import {mapGetters} from "vuex";
+import SwitchTheme from "../SwitchTheme.vue";
 
 export default {
   name: "AppFilter",
+  components: {SwitchTheme},
   data() {
     return {
       filteredArray: [

@@ -36,11 +36,11 @@
     }
 
     .app__filter {
-        @apply mt-4
+        @apply
         uppercase
         lg:mr-4
+        mt-4
         lg:space-x-4
-        m-4
         flex
         justify-end
         sm:flex-col
@@ -55,7 +55,12 @@
         lg:grid-cols-3
         justify-items-center
         p-4
-        bg-gray-700 bg-opacity-80
+        dark:bg-gray-700
+        bg-green-600
+    }
+
+    .input__search {
+        @apply border-2 p-2 rounded-lg shadow-inner w-full dark:bg-gray-700 dark:placeholder-white dark:text-white bg-gray-200 placeholder-black
     }
 
     .ul__movie-cast {
@@ -82,9 +87,6 @@
         @apply bg-red-500 h-5 w-5 mb-4 text-white text-center flex items-center justify-center rounded-full
     }
 
-    .input__search {
-        @apply border-2 p-2 rounded-lg shadow-inner w-full bg-gray-700 placeholder-white text-white
-    }
 
 }
 

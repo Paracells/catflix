@@ -1,56 +1,54 @@
 <template>
-  <div>
-    <div class="navbar__layout">
-      <nav class="justify-self-start">
-        <ul class="flex items-center">
-          <li class="mr-4">
+  <div class="navbar__layout">
+    <nav class="justify-self-start">
+      <ul class="flex items-center">
+        <li class="mr-4">
+          <router-link
+              @click="backToNowPlaying"
+              class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
+              :class="{ 'text-yellow-500': !status }"
+              :to="{ name: 'AppCatalog' }"
+          >
+            Catalog
+          </router-link>
+        </li>
+        <template v-if="logInApp">
+          <li class="mr-1">
             <router-link
-                @click="backToNowPlaying"
-                class="text-white block py-2 text-grey-darkest hover:text-indigo-500"
-                :class="{ 'text-yellow-500': !status }"
+                @click="gotoFavorites"
+                class="text-white block py-2 text-grey-darkest hover:text-indigo-500
+                "
+                :class="{ 'text-yellow-500': status }"
                 :to="{ name: 'AppCatalog' }"
             >
-              Catalog
+              My Favorites
             </router-link>
           </li>
-          <template v-if="logInApp">
-            <li class="mr-1">
-              <router-link
-                  @click="gotoFavorites"
-                  class="text-white block py-2 text-grey-darkest hover:text-indigo-500
-                "
-                  :class="{ 'text-yellow-500': status }"
-                  :to="{ name: 'AppCatalog' }"
-              >
-                My Favorites
-              </router-link>
-            </li>
-            <li class="navbar__counter">
-              {{ counter }}
-            </li>
-          </template>
-        </ul>
-      </nav>
+          <li class="navbar__counter">
+            {{ counter }}
+          </li>
+        </template>
+      </ul>
+    </nav>
 
-      <div class="mb-4 md:mb-0 lg:justify-self-center md:justify-self-start">
-        <input
-            class="input__search"
-            placeholder="Search a movie..."
-            type="text"
-            size="50"
-            v-model="searchText"
-            @keyup.enter="loadFilms"
-        />
-      </div>
-      <transition name="fade">
-        <app-auth
-            class="lg:justify-self-end md:justify-self-center"
-            @loggedStatus="logged"
-        />
-      </transition>
+    <div class="mb-4 md:mb-0 lg:justify-self-center md:justify-self-start">
+      <input
+          class="input__search"
+          placeholder="Search a movie..."
+          type="text"
+          size="50"
+          v-model="searchText"
+          @keyup.enter="loadFilms"
+      />
     </div>
-    <router-view/>
+    <transition name="fade">
+      <app-auth
+          class="lg:justify-self-end md:justify-self-center"
+          @loggedStatus="logged"
+      />
+    </transition>
   </div>
+  <router-view/>
 </template>
 
 <script>
@@ -119,5 +117,17 @@ export default {
   async created() {
     await this.$store.dispatch("fav/getFavorites");
   },
+  mounted() {
+    const htmlElement = document.documentElement
+    const theme = localStorage.getItem('theme')
+    if (theme === 'dark') {
+      htmlElement.classList.add('dark')
+      document.body.classList.add('bg-gray-900', 'text-white')
+    } else {
+      htmlElement.classList.remove('dark')
+      document.body.classList.toggle('bg-gray-100', 'text-black')
+
+    }
+  }
 };
 </script>

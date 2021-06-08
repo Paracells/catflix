@@ -15,6 +15,15 @@ export default {
     layout() {
       return this.$route.meta.layout || 'empty'
     }
+  },
+  created() {
+    const theme = localStorage.getItem('theme')
+    if (theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      localStorage.setItem('theme', 'dark')
+    } else {
+      localStorage.setItem('theme', 'light')
+
+    }
   }
 };
 </script>
