@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between items-start">
+  <div class="flex md:justify-between lg:items-start lg:flex-row flex-col md:flex-row ">
     <div class="mt-8 ml-4">
       <switch-theme/>
     </div>
