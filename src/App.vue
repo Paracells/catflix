@@ -17,13 +17,13 @@ export default {
     }
   },
   created() {
-    const theme = localStorage.getItem('theme')
-    if (theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      localStorage.setItem('theme', 'dark')
-    } else {
+    /*const theme = localStorage.getItem('theme')
+    if (theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('prefers-color-scheme').matches)) {
       localStorage.setItem('theme', 'light')
+    } else {
+      localStorage.setItem('theme', 'dark')
 
-    }
+    }*/
   }
 };
 </script>

@@ -120,14 +120,10 @@ export default {
   mounted() {
     const htmlElement = document.documentElement
     const theme = localStorage.getItem('theme')
-    if (theme === 'dark') {
-      htmlElement.classList.add('dark')
-      document.body.classList.add('bg-gray-900', 'text-white')
-    } else {
-      htmlElement.classList.remove('dark')
-      document.body.classList.toggle('bg-gray-100', 'text-black')
+    theme === 'dark' ?
+        htmlElement.classList.add('dark') : htmlElement.classList.remove('dark')
 
-    }
+
   }
 };
 </script>
