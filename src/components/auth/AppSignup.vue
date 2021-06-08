@@ -4,15 +4,15 @@
   >
     <div
         @click.stop
-        class="max-h-full flex items-center justify-center bg-gray-800 py-10 px-4 sm:px-6 lg:px-8 w-full max-w-xl rounded-xl"
+        class="max-h-full flex items-center justify-center dark:bg-gray-800 bg-gray-200 py-10 px-4 sm:px-6 lg:px-8 w-full max-w-xl rounded-xl"
     >
       <div class="max-w-md w-full">
         <div class="flex justify-between text-gray-300 items-center">
-          <h2 class="-mt-2 text-center text-3xl font-extrabold text-gray-300">
+          <h2 class="-mt-2 text-center text-3xl font-extrabold dark:text-gray-300 text-black">
             Create CatFlix account
           </h2>
           <svg @click="exitForm"
-               class="w-8 h-8 cursor-pointer text-red-300"
+               class="w-8 h-8 cursor-pointer dark:text-red-300 text-red-500"
                fill="none"
                stroke="currentColor"
                viewBox="0 0 24 24"

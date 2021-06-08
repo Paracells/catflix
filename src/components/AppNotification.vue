@@ -1,7 +1,8 @@
 <template>
-  <div class="absolute w-full overflow-hidden p-2 text-center text-3xl z-0 uppercase font-medium bg-opacity-80"
-       :class="color"
-       @mouseover="$emit('closeNotification')">
+  <div
+      class="absolute w-full overflow-hidden text-white  p-2 text-center text-3xl z-0 uppercase font-medium bg-opacity-80"
+      :class="color"
+      @mouseover="$emit('closeNotification')">
     <div>{{ message }}</div>
   </div>
 </template>

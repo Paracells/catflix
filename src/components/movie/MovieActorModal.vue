@@ -3,11 +3,11 @@
        class="absolute inset-0 z-40 bg-opacity-70 bg-black flex items-center justify-center h-screen"
   >
     <div
-        class="bg-gray-800 py-4 px-2 w-full max-w-xl rounded-xl flex flex-col items-end justify-items-end">
+        class="dark:bg-gray-800 bg-gray-300 py-4 px-2 w-full max-w-xl rounded-xl flex flex-col items-end justify-items-end">
 
       <div
           @click.stop
-          class="grid grid-cols-4 row-auto  bg-gray-800 py-4 px-2 w-full rounded-xl gap-2 "
+          class="grid grid-cols-4 row-auto  dark:bg-gray-800 bg-gray-200 py-4 px-2 w-full rounded-xl gap-2 "
       >
         <div class="row-start-1">Name:</div>
         <div class="row-start-1 col-span-2">{{ person.name }}</div>
@@ -27,7 +27,7 @@
         <div class="col-start-4 row-start-1 row-end-6">
           <img class="h-auto row-start-1 row-end-6 object-cover col-start-4 col-span-8 " :src="imgLink" alt="">
         </div>
-        <div class="row-start-6 text-yellow-500 mt-2">Movies</div>
+        <div class="row-start-6 dark:text-yellow-500 text-blue-700 mt-2">Movies</div>
         <transition-group tag="div" name="fade"
                           class="row-start-7 row-end-7 inline-block col-span-5 inline-flex space-x-4 mt-2">
           <img class="w-[138px] h-28 object-cover " :src="getImage(i, 'poster_path')" :alt="i.original_title"
