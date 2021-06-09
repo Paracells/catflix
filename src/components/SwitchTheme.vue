@@ -28,7 +28,6 @@ export default {
   },
   watch: {
     enabled(value) {
-      console.log('watch: ', value)
       if (value) {
         localStorage.setItem('theme', 'dark')
         document.documentElement.classList.add('dark')

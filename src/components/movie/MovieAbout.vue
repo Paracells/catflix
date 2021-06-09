@@ -26,10 +26,10 @@
         <div class="col-start-1">Writing</div>
         <div class="col-start-2">{{ crew.writing ? crew.writing : 'no data' }}</div>
         <div class="col-start-1">Keywords</div>
-        <div class="col-start-2 flex flex-wrap md:mr-4 justify-start md:space-x-4">
+        <div class="col-start-2 flex flex-wrap justify-start ">
           <p class="inline-block" v-if="keywords.length===0">no data</p>
-          <div v-else class="m-4 lg:m-0" v-for="keyword in keywords"><span
-              class="chips dark:bg-green-900 bg-yellow-300 text-blue-800 dark:text-black">{{
+          <div v-else class="m-2" v-for="keyword in keywords"><span
+              class="chips dark:bg-green-900 bg-yellow-300 text-blue-800  dark:text-white">{{
               keyword
             }}</span>
           </div>

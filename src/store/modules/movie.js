@@ -59,7 +59,7 @@ const movie = {
                 import.meta.env.VITE_APP_MOVIE_API_KEY
             }&language=en-US`)
             commit(SET_CREW, result.data.crew);
-            commit(SET_CREDITS, result.data.cast.splice(0, 5));
+            commit(SET_CREDITS, result.data.cast.splice(0, 8));
         },
         async getKeywords({commit}, id) {
             const result = await movieAxios.get(`${id}/keywords?api_key=${

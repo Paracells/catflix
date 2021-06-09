@@ -41,6 +41,13 @@ export default {
       await this.getKeywords(this.$route.params.id)
     }
     this.loading = false
+  },
+
+  mounted() {
+    const htmlElement = document.documentElement
+    const theme = localStorage.getItem('theme')
+    theme === 'dark' ?
+        htmlElement.classList.add('dark') : htmlElement.classList.remove('dark')
   }
 
 }
