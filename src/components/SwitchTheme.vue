@@ -17,6 +17,7 @@
 
 <script>
 import {Switch} from '@headlessui/vue'
+import {toggleTheme} from "../utils";
 
 export default {
   components: {Switch},
@@ -28,16 +29,7 @@ export default {
   },
   watch: {
     enabled(value) {
-      if (value) {
-        localStorage.setItem('theme', 'dark')
-        document.documentElement.classList.add('dark')
-        document.body.classList.add('bg-gray-900', 'text-white')
-      } else {
-        localStorage.setItem('theme', 'light')
-        document.documentElement.classList.remove('dark')
-        document.body.classList.remove('bg-gray-900', 'text-white')
-
-      }
+      toggleTheme(value)
     }
   },
   created() {

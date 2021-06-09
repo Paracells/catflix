@@ -43,13 +43,6 @@ export default {
     this.loading = false
   },
 
-  mounted() {
-    const htmlElement = document.documentElement
-    const theme = localStorage.getItem('theme')
-    theme === 'dark' ?
-        htmlElement.classList.add('dark') : htmlElement.classList.remove('dark')
-  }
-
 }
 </script>
 

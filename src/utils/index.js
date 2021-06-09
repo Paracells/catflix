@@ -53,3 +53,20 @@ export function birthDate(date) {
     const difference = (currentTime - birthDateTime)
     return Math.trunc(difference / (1000 * 60 * 60 * 24 * 365))
 }
+
+/**
+ * toggle dark/light theme
+ * @param theme
+ */
+export function toggleTheme(theme) {
+    if (theme) {
+        localStorage.setItem('theme', 'dark')
+        document.documentElement.classList.add('dark')
+        document.body.classList.add('bg-gray-900', 'text-white')
+    } else {
+        localStorage.setItem('theme', 'light')
+        document.documentElement.classList.remove('dark')
+        document.body.classList.remove('bg-gray-900', 'text-white')
+
+    }
+}
