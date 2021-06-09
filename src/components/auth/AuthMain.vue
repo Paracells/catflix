@@ -31,7 +31,7 @@ import AppSignup from "@/components/auth/AppSignup.vue";
 import {mapGetters} from "vuex";
 
 export default {
-  name: "AppAuth",
+  name: "AuthMain",
   components: {AppLogin, AppSignup},
   data() {
     return {
@@ -83,6 +83,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

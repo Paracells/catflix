@@ -14,7 +14,7 @@ const routes = [
         path: "/movies",
         name: "AppCatalog",
         meta: {layout: 'navbar'},
-        component: () => import("../components/catalog/AppCatalog.vue"),
+        component: () => import("../components/catalog/CatalogMain.vue"),
 
 
     },

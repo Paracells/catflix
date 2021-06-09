@@ -42,7 +42,7 @@
       />
     </div>
     <transition name="fade">
-      <app-auth
+      <auth-main
           class="lg:justify-self-end md:justify-self-center"
           @loggedStatus="logged"
       />
@@ -53,12 +53,12 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import AppAuth from "../auth/AppAuth.vue";
+import AuthMain from "../auth/AuthMain.vue";
 import AppNotification from "../AppNotification.vue";
 import {WARNING} from "../../utils/color";
 
 export default {
-  components: {AppNotification, AppAuth},
+  components: {AppNotification, AuthMain},
   name: "Navbar",
   data() {
     return {
@@ -104,8 +104,6 @@ export default {
         } else {
           this.$store.commit("movies/SET_MOVIES", this.getSavedFromFavorites);
         }
-      } else {
-        await this.resetFilter();
       }
     },
     gotoFavorites() {

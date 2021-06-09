@@ -30,7 +30,7 @@
 import {calcLength, getImage} from "../../utils";
 
 export default {
-  name: "AppMovie",
+  name: "CatalogMovie",
   props: ["movie"],
   data() {
     return {

@@ -5,7 +5,7 @@
       <ul
           class="grid mt-8 gap-8 xl:grid-cols-4 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mr-4 ml-4">
         <li v-for="movie in getMovies" :key="movie.id">
-          <app-movie :movie="movie"/>
+          <catalog-movie :movie="movie"/>
         </li>
       </ul>
     </div>
@@ -17,13 +17,13 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 
-import AppMovie from "./AppMovie.vue";
+import CatalogMovie from "./CatalogMovie.vue";
 import Loader from "../Loader.vue";
 
 
 export default {
-  components: {Loader, AppMovie,},
-  name: "AppMovies",
+  components: {Loader, CatalogMovie,},
+  name: "CatalogMovies",
   computed: {
     ...mapGetters("movies", ["getMovies", 'getFilter']),
 

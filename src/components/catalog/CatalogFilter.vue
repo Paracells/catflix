@@ -25,7 +25,7 @@ import {mapGetters} from "vuex";
 import SwitchTheme from "../SwitchTheme.vue";
 
 export default {
-  name: "AppFilter",
+  name: "CatalogFilter",
   components: {SwitchTheme},
   data() {
     return {
