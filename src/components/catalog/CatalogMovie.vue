@@ -38,7 +38,6 @@ export default {
       imgHover: "",
       linkHover: "",
       titleHover: "",
-      loading: false,
       imageLink: ''
     };
   },
@@ -57,9 +56,9 @@ export default {
     },
   },
   async created() {
-    const result = getImage(this.movie, 'poster_path')
-    this.imageLink = result
+    this.imageLink = getImage(this.movie, 'poster_path')
   },
+
   computed: {
     overView() {
       return calcLength(this.movie.overview)

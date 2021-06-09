@@ -6,12 +6,10 @@
         <button @click="showSignup = true" class="btn-header hover:bg-blue-400">
           Signup
         </button>
-        <transition name="fade">
-          <app-login v-if="showSignIn" @close="getUserData"/>
-        </transition>
-        <transition name="fade">
-          <app-signup v-if="showSignup" @close="getUserData"/>
-        </transition>
+        <transition-group name="fade">
+          <app-login v-if="showSignIn" @close="getUserData" :key="1"/>
+          <app-signup v-if="showSignup" @close="getUserData" :key="2"/>
+        </transition-group>
       </div>
       <div v-else class="md:flex lg:block">
         <span class="mr-6"><span class="text-white">Hello, </span><span class="dark:text-green-500 text-yellow-500">{{
