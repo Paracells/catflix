@@ -1,5 +1,7 @@
 <p align="center">
+<a href="https://flamboyant-ritchie-867001.netlify.app/" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Paracells/catflix/main/src/assets/logo.png" alt="CatFlix logo">
+</a>
 </p>
 
 <br/>
