@@ -1,12 +1,9 @@
-<center>
-<img src="https://raw.githubusercontent.com/Paracells/catflix/main/src/assets/logo.png" alt="Vite logo">
+<p align="center">
+<img src="https://raw.githubusercontent.com/Paracells/catflix/main/src/assets/logo.png" alt="CatFlix logo">
+</p>
 
-</center>
-
-> Simple movie search
-
-<hr/>
-#<center>Tools used</center>
+<br/>
+<p align="center">Tools used</p>
 
 # Vite ⚡
 
