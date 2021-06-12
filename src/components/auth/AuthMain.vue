@@ -7,8 +7,8 @@
           Signup
         </button>
         <transition-group name="fade">
-          <app-login v-if="showSignIn" @close="getUserData" :key="1"/>
-          <app-signup v-if="showSignup" @close="getUserData" :key="2"/>
+          <auth-login v-if="showSignIn" @close="getUserData" :key="1"/>
+          <auth-signup v-if="showSignup" @close="getUserData" :key="2"/>
         </transition-group>
       </div>
       <div v-else class="md:flex lg:block">
@@ -24,13 +24,13 @@
 </template>
 
 <script>
-import AppLogin from "@/components/auth/AppLogin.vue";
-import AppSignup from "@/components/auth/AppSignup.vue";
+import AuthLogin from "@/components/auth/AuthLogin.vue";
+import AuthSignup from "@/components/auth/AuthSignup.vue";
 import {mapGetters} from "vuex";
 
 export default {
   name: "AuthMain",
-  components: {AppLogin, AppSignup},
+  components: {AuthLogin, AuthSignup},
   data() {
     return {
       showSignIn: false,
